@@ -1,0 +1,1 @@
+opam ikkovlari tokchadan tovoqlarni olib chakka o'tadigan joyga qo'yishdi
