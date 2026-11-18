@@ -1,0 +1,1 @@
+tomli uy oldida zil turibdi
