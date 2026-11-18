@@ -8,7 +8,10 @@ with one scoring script.
 ## Data
 
 Source: [Uzbek Speech Corpus (USC), ISSAI](https://huggingface.co/datasets/issai/Uzbek_Speech_Corpus)
-([paper](https://arxiv.org/abs/2107.14419)).
+([paper](https://arxiv.org/abs/2107.14419)). The data is not covered by our
+Apache-2.0 license: the Hugging Face card gives MIT and ISSAI's USC page gives
+CC BY 4.0. See [data/README.md](data/README.md) for both licenses and the
+citation.
 
 | Split | Source | Size |
 |-------|--------|------|
@@ -35,8 +38,10 @@ single speaker is more than about 1% of train.
 | Path | Contents |
 |------|----------|
 | `LICENSE` | Apache-2.0, covers the code only |
+| `.gitignore` | Keeps Python caches, the virtual environment, model weights and logits out of git |
 | `requirements.txt` | Pinned Python packages for the shared code and tests |
 | `pytest.ini` | pytest configuration (repo root on the import path, tests in `tests/`) |
+| `data/README.md` | USC source, licenses and citation |
 | `data/make_splits.py` | Selects the train speakers and writes `data/clean/train_speakers.txt` |
 | `data/clean/train_speakers.txt` | Speaker IDs of our train split, one per line |
 | `data/get_raw.py` | Copies the clips of our splits from the extracted USC archive into `data/raw/usc/` |
