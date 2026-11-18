@@ -39,12 +39,21 @@ single speaker is more than about 1% of train.
 | `pytest.ini` | pytest configuration (repo root on the import path, tests in `tests/`) |
 | `data/make_splits.py` | Selects the train speakers and writes `data/clean/train_speakers.txt` |
 | `data/clean/train_speakers.txt` | Speaker IDs of our train split, one per line |
+| `data/get_raw.py` | Copies the clips of our splits from the extracted USC archive into `data/raw/usc/` |
+| `data/raw/usc/<split>/<speaker_id>/` | Our clips as lossless 16 kHz mono FLAC (`<clip_id>.flac`) with the unchanged USC transcript (`<clip_id>.txt`) |
 | `tests/` | pytest tests for the data pipeline |
 
 ## Reproducing
 
+The USC archive (9.47 GB) is not in this repository; only the clips we use are,
+under `data/raw/`. To rebuild them from the original archive:
+
 ```bash
 pip install -r requirements.txt
-python data/make_splits.py --usc-dir /path/to/ISSAI_USC
+curl -L -o ISSAI_USC.tar.gz https://huggingface.co/datasets/issai/Uzbek_Speech_Corpus/resolve/main/ISSAI_USC.tar.gz
+shasum -a 256 ISSAI_USC.tar.gz  # 44dc6c70cde073548d975dcdcd3c44ca228ca24ea179905a6cbf5b66ed2fa92d
+tar -xzf ISSAI_USC.tar.gz
+python data/make_splits.py --usc-dir ISSAI_USC
+python data/get_raw.py --usc-dir ISSAI_USC
 pytest
 ```
