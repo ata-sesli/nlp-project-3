@@ -33,6 +33,12 @@ minute, the largest has 5.2 h. Without a limit, one speaker would make up about
 20% of our train set. Only speakers with at most 0.25 h are eligible, so no
 single speaker is more than about 1% of train.
 
+Some USC clips share identical audio. In most of these cases the copies have
+different transcripts, so at least one transcript is wrong and we cannot tell
+which. `data/clean.py` removes all such copies from train; copies with the same
+transcript keep the first clip ID. In dev and test, audio shared under
+different transcripts is only flagged, never removed.
+
 ## Repository layout
 
 | Path | Contents |
@@ -46,6 +52,9 @@ single speaker is more than about 1% of train.
 | `data/clean/train_speakers.txt` | Speaker IDs of our train split, one per line |
 | `data/get_raw.py` | Copies the clips of our splits from the extracted USC archive into `data/raw/usc/` |
 | `data/raw/usc/<split>/<speaker_id>/` | Our clips as lossless 16 kHz mono FLAC (`<clip_id>.flac`) with the unchanged USC transcript (`<clip_id>.txt`) |
+| `data/clean.py` | Applies the cleaning rules to `data/raw/` and writes the split CSVs and `removed.csv` |
+| `data/clean/{train,dev,test}.csv` | Clean splits: `id, path, transcript, speaker_id, duration_s, start_s, end_s`; `path` points into `data/raw/` |
+| `data/clean/removed.csv` | Every clip the cleaning removed, fixed or flagged: `id, split, action, reason, detail` |
 | `tests/` | pytest tests for the data pipeline |
 
 ## Reproducing
@@ -60,5 +69,6 @@ shasum -a 256 ISSAI_USC.tar.gz  # 44dc6c70cde073548d975dcdcd3c44ca228ca24ea17990
 tar -xzf ISSAI_USC.tar.gz
 python data/make_splits.py --usc-dir ISSAI_USC
 python data/get_raw.py --usc-dir ISSAI_USC
+python data/clean.py
 pytest
 ```
