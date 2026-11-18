@@ -1,0 +1,14 @@
+# Python and tooling caches
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+.DS_Store
+
+# Model weights and logits (published on Hugging Face, not in git)
+*.pt
+*.ckpt
+*.safetensors
+*.nemo
+*.npy
