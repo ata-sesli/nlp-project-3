@@ -104,7 +104,6 @@ RULES = [
     # Serhat: audio checks (empty/unreadable/silent audio, noise and clipping,
     #   long leading/trailing silence via start_s/end_s) and the wrong-transcript
     #   rule from the NVIDIA CTC CER scan.
-    # Enes: his checks, once agreed.
 ]
 
 
