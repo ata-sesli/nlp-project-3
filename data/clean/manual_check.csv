@@ -1,0 +1,148 @@
+rule,id,path,score,transcript,model_output,really_wrong,note
+8,1063532321_1_5910_1,data/raw/usc/train/1063532321/1063532321_1_5910_1.flac,cer=0.9500 threshold=0.5,ayollari chevar ekan,O.,yes,
+8,1120093679_1_13926_2,data/raw/usc/train/1120093679/1120093679_1_13926_2.flac,cer=2.1000 threshold=0.5,kuyovnikida quyruq yegandan o'g'ilnikida yumruq ye,"Kuyovnikida quyruq yegandan. oʻgʻilnikida yumruq ye, Kuyovnikida quyruq yegandan. oʻgʻilnikida yumruq yee, kuuyovnikida quyruq yegandan, oʻgʻilnikida yumruq yee.",yes,
+8,182862732_1_54258_1,data/raw/usc/train/182862732/182862732_1_54258_1.flac,cer=0.5263 threshold=0.5,o'ziga o'zi tasalli,Oʻziga oʻzi tasalli bildiradi.,no,
+8,205857683_1_55277_1,data/raw/usc/train/205857683/205857683_1_55277_1.flac,cer=0.6364 threshold=0.5,uni pok deb,Unidi.,yes,
+8,205857683_1_63810_1,data/raw/usc/train/205857683/205857683_1_63810_1.flac,cer=0.5833 threshold=0.5,mahkamroq bag'riga bosdi,Qancha bolani mahkamroq bagʻriga bosdi.,yes,
+8,209991312_1_65016_4,data/raw/usc/train/209991312/209991312_1_65016_4.flac,cer=1.3636 threshold=0.5,u bilar edi,Bu qiliqlarini u bilar edi.,yes,
+8,26_data_26-133,data/raw/usc/train/26/26_data_26-133.flac,cer=0.8750 threshold=0.5,ma soeur,M.,no,
+8,26_data_26-14,data/raw/usc/train/26/26_data_26-14.flac,cer=0.8750 threshold=0.5,ma soeur,M.,no,
+8,368709245_1_56045_1,data/raw/usc/train/368709245/368709245_1_56045_1.flac,cer=0.7500 threshold=0.5,uni o'roqqa yaramaydigan,Buoqqa yaramaydigan boʻlganini.,yes,
+8,530913645_1_53127_3,data/raw/usc/train/530913645/530913645_1_53127_3.flac,cer=0.8333 threshold=0.5,yetib olishingiz bilanoq,Yutib.,yes,
+8,551585738_1_3011_5,data/raw/usc/train/551585738/551585738_1_3011_5.flac,cer=1.3158 threshold=0.5,nima qilay ey ahmoq,"Agar xatoliklar boʻlmasa, saqlang.",yes,
+8,634377575_1_56787_1,data/raw/usc/train/634377575/634377575_1_56787_1.flac,cer=0.5385 threshold=0.5,garchi u hech,Garchi hech nima.,yes,
+8,646732078_1_59949_1,data/raw/usc/train/646732078/646732078_1_59949_1.flac,cer=0.6129 threshold=0.5,devordagi mixga ilig'lik duxoba,"D’yordagi muhitga ulugʻlik, duxoba gʻilofli bo.",yes,
+8,6_A_6_A-62,data/raw/usc/train/6_A/6_A_6_A-62.flac,cer=1.4167 threshold=0.5,tayanch reja,Tayanch tayanch-chirriza Rja.,yes,
+8,702540657_1_17735_1,data/raw/usc/train/702540657/702540657_1_17735_1.flac,cer=0.8261 threshold=0.5,savr degan sonli qish men javzongdan qo'rqaman,Gutchi Filipp Lu Fa Aflu.,yes,
+8,843269806_1_67453_1,data/raw/usc/train/843269806/843269806_1_67453_1.flac,cer=0.8667 threshold=0.5,xil chak tikpuk,Ohangi har xil chak TikPook.,yes,
+8,865007387_1_66848_1,data/raw/usc/train/865007387/865007387_1_66848_1.flac,cer=0.5769 threshold=0.5,yosh bolaga aylanib qoldim,Toʻsatdan yana yosh bolaga aylanib qoldim.,yes,
+8,874333869_1_63756_1,data/raw/usc/train/874333869/874333869_1_63756_1.flac,cer=0.5625 threshold=0.5,mard yigit izini,Y yigit izmi bor.,yes,
+8,890780418_1_66579_1,data/raw/usc/train/890780418/890780418_1_66579_1.flac,cer=0.5385 threshold=0.5,keldi voy y y,Ke voy.,no,
+8,97647674_1_12665_2,data/raw/usc/train/97647674/97647674_1_12665_2.flac,cer=0.9815 threshold=0.5,yaxshi xotin go'sht quritar yomon xotin go'sht sasitar,O.,yes,
+8,97647674_1_14393_2,data/raw/usc/train/97647674/97647674_1_14393_2.flac,cer=0.5957 threshold=0.5,otim ketsa toycham bor to'nim ketsa parcham bor,"Toʻni ketsa, parcham bor deb.",yes,
+8,97647674_1_14428_3,data/raw/usc/train/97647674/97647674_1_14428_3.flac,cer=0.6286 threshold=0.5,qora sigir tushida kunjara ko'ribdi,Kunjara koʻdi.,yes,
+8,97647674_1_14601_3,data/raw/usc/train/97647674/97647674_1_14601_3.flac,cer=0.9091 threshold=0.5,tursang so'zingda hurmat o'zingda,Ulugʻ kishi va’dasida yolgʻon yoʻq.,yes,
+8,97647674_1_14659_3,data/raw/usc/train/97647674/97647674_1_14659_3.flac,cer=0.7660 threshold=0.5,yolg'iz aql o'zi yaxshi ikki bo'lsa yana yaxshi,Yo chopsa qoʻshilib chop.,yes,
+8,97647674_1_67335_3,data/raw/usc/train/97647674/97647674_1_67335_3.flac,cer=0.5238 threshold=0.5,lovullaki ot ko'tarar,Lovuldagi ot,yes,
+8,97647674_1_75726_3,data/raw/usc/train/97647674/97647674_1_75726_3.flac,cer=0.9583 threshold=0.5,kal qizning er dardi bor,O.,no,
+8,97647674_1_75857_3,data/raw/usc/train/97647674/97647674_1_75857_3.flac,cer=0.8571 threshold=0.5,xon o'ziga bek,Hukim oʻzi qon oʻziga bek.,yes,
+8,bahor19_data_bahor19-87,data/raw/usc/train/bahor19/bahor19_data_bahor19-87.flac,cer=0.7692 threshold=0.5,bu jarlik kun,Bizni bu jarlik kunduzi,no,
+8,bahor9_data_bahor9-131,data/raw/usc/train/bahor9/bahor9_data_bahor9-131.flac,cer=0.8750 threshold=0.5,endi chi,Endi endi jdi.,no,
+8,bahor9_data_bahor9-33,data/raw/usc/train/bahor9/bahor9_data_bahor9-33.flac,cer=0.5714 threshold=0.5,negadir titrar,Men negadir titrarardi.,no,
+8,bahor9_data_bahor9-81,data/raw/usc/train/bahor9/bahor9_data_bahor9-81.flac,cer=1.2857 threshold=0.5,men voy,Men oʻy berdim.,no,
+8,jamila1.2_data_jamila1.2-113,data/raw/usc/train/jamila1.2/jamila1.2_data_jamila1.2-113.flac,cer=0.6190 threshold=0.5,qumg'onni engashtirib,Chooyan qoʻnggʻoqni engashtirib,yes,
+8,jamila2.1_data_jamila2.1-59,data/raw/usc/train/jamila2.1/jamila2.1_data_jamila2.1-59.flac,cer=0.6923 threshold=0.5,burilib ketdi,Oʻrmonga burilib ketdi.,yes,
+8,jamila2.3_data_jamila2.3-20,data/raw/usc/train/jamila2.3/jamila2.3_data_jamila2.3-20.flac,cer=0.5333 threshold=0.5,tag'in deyishib,Butagʻandi ish,no,
+8,jamila3.1_data_jamila3.1-35,data/raw/usc/train/jamila3.1/jamila3.1_data_jamila3.1-35.flac,cer=0.5789 threshold=0.5,biz u bilan bemalol,Biz u bilan bemalol boʻldikmiz.,no,
+8,jamila3.1_data_jamila3.1-39,data/raw/usc/train/jamila3.1/jamila3.1_data_jamila3.1-39.flac,cer=0.6000 threshold=0.5,juda nari borsa,"U juda nari boʻlsa, aniq.",no,
+8,jamila3.3_data_jamila3.3-192,data/raw/usc/train/jamila3.3/jamila3.3_data_jamila3.3-192.flac,cer=0.9524 threshold=0.5,tashla tashlasang chi,T.,yes,
+8,jamila6.3_data_jamila6.3-136,data/raw/usc/train/jamila6.3/jamila6.3_data_jamila6.3-136.flac,cer=0.5625 threshold=0.5,allanima dedi yu,"Oʻqib, allama deydi-yu",yes,
+8,jamila7.3_data_jamila7.3-36,data/raw/usc/train/jamila7.3/jamila7.3_data_jamila7.3-36.flac,cer=1.0000 threshold=0.5,bir vaqt,Bir vaqt boʻlgan.,no,
+8,oxirgizamon11_data_oxirgizamon11-68,data/raw/usc/train/oxirgizamon11/oxirgizamon11_data_oxirgizamon11-68.flac,cer=0.7143 threshold=0.5,qora tuynuklar,Qora tuynuklar va hokaso.,yes,
+8,oxirgizamon2_data_oxirgizamon2-46,data/raw/usc/train/oxirgizamon2/oxirgizamon2_data_oxirgizamon2-46.flac,cer=0.5556 threshold=0.5,men kafil,Men chafildim.,no,
+8,oxirgizamon6_data_oxirgizamon6-34,data/raw/usc/train/oxirgizamon6/oxirgizamon6_data_oxirgizamon6-34.flac,cer=0.6667 threshold=0.5,aytar edimki,Deb aytardim.,yes,
+8,qiyomat1.3_data_qiyomat1.3-47,data/raw/usc/train/qiyomat1.3/qiyomat1.3_data_qiyomat1.3-47.flac,cer=0.8889 threshold=0.5,yana ikki,K.,yes,
+8,qiyomat1.6_data_qiyomat1.6-76,data/raw/usc/train/qiyomat1.6/qiyomat1.6_data_qiyomat1.6-76.flac,cer=1.0000 threshold=0.5,mah mah,O.,no,
+8,qiyomat3.1_data_qiyomat3.1-138,data/raw/usc/train/qiyomat3.1/qiyomat3.1_data_qiyomat3.1-138.flac,cer=0.5556 threshold=0.5,odam nobud bo'ladi,Odam nobud boʻladi. uzoq shun.,yes,
+8,qiyomat3.1_data_qiyomat3.1-21,data/raw/usc/train/qiyomat3.1/qiyomat3.1_data_qiyomat3.1-21.flac,cer=1.0000 threshold=0.5,har holda,Xdim.,no,
+8,qiyomat4.2_data_qiyomat4.2-16,data/raw/usc/train/qiyomat4.2/qiyomat4.2_data_qiyomat4.2-16.flac,cer=0.7143 threshold=0.5,yo nima deysan,Vonmamadi.,no,
+8,qiyomat4.3_data_qiyomat4.3-66,data/raw/usc/train/qiyomat4.3/qiyomat4.3_data_qiyomat4.3-66.flac,cer=1.0000 threshold=0.5,dedi u,M,no,
+8,qiyomat5.5_data_qiyomat5.5-115,data/raw/usc/train/qiyomat5.5/qiyomat5.5_data_qiyomat5.5-115.flac,cer=0.7368 threshold=0.5,o'zingniki beminnat,Be millat.,yes,
+8,yer5_data_yer5-81,data/raw/usc/train/yer5/yer5_data_yer5-81.flac,cer=0.6190 threshold=0.5,ichiga kirib bo'lmasa,"Ichiga kirib boʻlmasa, davlat ketib.",yes,
+9,182862732_1_1487_2,data/raw/usc/train/182862732/182862732_1_1487_2.flac,clipped 3.14% > 1.00%,birdan yuzgacha yuzdan minggacha sanab yotdi,,no,
+9,182862732_1_1490_1,data/raw/usc/train/182862732/182862732_1_1490_1.flac,clipped 3.92% > 1.00%,militsionerlar yelib yugurarmish,,no,
+9,182862732_1_1491_1,data/raw/usc/train/182862732/182862732_1_1491_1.flac,clipped 3.24% > 1.00%,ularni o'sha o'lgan odamning o'zi boshlab yurganmish,,no,
+9,182862732_1_1498_1,data/raw/usc/train/182862732/182862732_1_1498_1.flac,clipped 2.90% > 1.00%,turishga turdi yu nima qilarini bilmay taxtaday kotdi,,no,
+9,182862732_1_1500_1,data/raw/usc/train/182862732/182862732_1_1500_1.flac,clipped 4.33% > 1.00%,eshik ochilgandan keyin qo'shni ayolning ma'sumaxon ikkitagina tuxum berib turing,,no,
+9,182862732_1_1501_1,data/raw/usc/train/182862732/182862732_1_1501_1.flac,clipped 5.38% > 1.00%,aylanay deganini eshitdi va jim bo'ldi,,no,
+9,182862732_1_1504_1,data/raw/usc/train/182862732/182862732_1_1504_1.flac,clipped 3.47% > 1.00%,bo'sh qopday shalvirab o'tirib qoldi,,no,
+9,182862732_1_1507_1,data/raw/usc/train/182862732/182862732_1_1507_1.flac,clipped 4.35% > 1.00%,bormayman maktabga deb o'yladi asror,,no,
+9,182862732_1_1512_1,data/raw/usc/train/182862732/182862732_1_1512_1.flac,clipped 4.44% > 1.00%,o'ziga o'zi tasalli berganicha o'rnidan turdi,,no,
+9,182862732_1_1514_1,data/raw/usc/train/182862732/182862732_1_1514_1.flac,clipped 2.37% > 1.00%,qayta qayta takrorladi,,no,
+9,182862732_1_1515_1,data/raw/usc/train/182862732/182862732_1_1515_1.flac,clipped 4.20% > 1.00%,o'zini shunga ishontirmochchi bo'ldi,,no,
+9,182862732_1_1516_1,data/raw/usc/train/182862732/182862732_1_1516_1.flac,clipped 4.99% > 1.00%,ammo ro'hiy muolaja ta'sir etmadi,,no,
+9,182862732_1_1518_1,data/raw/usc/train/182862732/182862732_1_1518_1.flac,clipped 3.70% > 1.00%,tomog'idan narsa o'tmasa xam yedi,,no,
+9,182862732_1_1523_1,data/raw/usc/train/182862732/182862732_1_1523_1.flac,clipped 3.53% > 1.00%,ular har kuni shu yerda uchrashardi,,no,
+9,182862732_1_54240_1,data/raw/usc/train/182862732/182862732_1_54240_1.flac,clipped 1.49% > 1.00%,tirik bo'lsa yana qanaqa,,no,
+9,182862732_1_54243_1,data/raw/usc/train/182862732/182862732_1_54243_1.flac,clipped 1.67% > 1.00%,asror eshik qo'ng'irog'ining asabiy,,no,
+9,182862732_1_54249_1,data/raw/usc/train/182862732/182862732_1_54249_1.flac,clipped 1.35% > 1.00%,vujudida jon pon,,no,
+9,182862732_1_54277_1,data/raw/usc/train/182862732/182862732_1_54277_1.flac,clipped 3.80% > 1.00%,endi nima buladi,,no,
+9,182862732_1_62784_1,data/raw/usc/train/182862732/182862732_1_62784_1.flac,clipped 1.58% > 1.00%,jarangidan sapchib turib ketdi,,no,
+9,182862732_1_62790_1,data/raw/usc/train/182862732/182862732_1_62790_1.flac,clipped 1.84% > 1.00%,qolmaganini shundagina xis qildi,,no,
+9,182862732_1_62799_1,data/raw/usc/train/182862732/182862732_1_62799_1.flac,clipped 1.27% > 1.00%,berganicha o'rnidan turdi,,no,
+9,182862732_1_62810_1,data/raw/usc/train/182862732/182862732_1_62810_1.flac,clipped 1.37% > 1.00%,shu yerda uchrashardi,,no,
+9,19_E_19_E-32,data/raw/usc/train/19_E/19_E_19_E-32.flac,clipped 2.83% > 1.00%,yangi hayot,,no,
+9,19_E_19_E-62,data/raw/usc/train/19_E/19_E_19_E-62.flac,clipped 5.64% > 1.00%,tayanch reja,,no,
+9,208438176_1_78900_2,data/raw/usc/train/208438176/208438176_1_78900_2.flac,SNR 8.0 dB < 8.4,bo'lma yomon bilan yo'ldosh,,no,
+9,293824804_1_72011_2,data/raw/usc/train/293824804/293824804_1_72011_2.flac,SNR 7.6 dB < 8.4,elanmagan dov yomon,,no,
+9,32_data_32-39,data/raw/usc/train/32/32_data_32-39.flac,SNR 7.1 dB < 8.4,deb so'radi,,no,
+9,940280728_1_67287_1,data/raw/usc/train/940280728/940280728_1_67287_1.flac,SNR 6.0 dB < 8.4,javobini berib yubor,,yes,
+9,bahor8_data_bahor8-187,data/raw/usc/train/bahor8/bahor8_data_bahor8-187.flac,SNR 6.1 dB < 8.4,mayli aka,,no,
+9,bahor9_data_bahor9-4,data/raw/usc/train/bahor9/bahor9_data_bahor9-4.flac,SNR 7.8 dB < 8.4,u yo'lda uyg'ongan,,no,
+9,182862732_1_1488_1,data/raw/usc/train/182862732/182862732_1_1488_1.flac,clipped 4.20% > 1.00%,sanagani foyda berdimi yo uyqusizlik yengdimi   uxlab qoldi,,no,rest of the flagged group
+9,182862732_1_1489_1,data/raw/usc/train/182862732/182862732_1_1489_1.flac,clipped 3.35% > 1.00%,tushida shahar bezovta emish,,no,rest of the flagged group
+9,182862732_1_1492_1,data/raw/usc/train/182862732/182862732_1_1492_1.flac,clipped 3.42% > 1.00%,nuqul qotil qani deb baqirarmish,,no,rest of the flagged group
+9,182862732_1_1493_1,data/raw/usc/train/182862732/182862732_1_1493_1.flac,clipped 3.76% > 1.00%,asror uni ko'rgan sari tirik ekan ku deb xursand bo'larmish,,no,rest of the flagged group
+9,182862732_1_1494_1,data/raw/usc/train/182862732/182862732_1_1494_1.flac,clipped 3.45% > 1.00%,tirik bo'lsa yana qanaqa qotilni izlashyapti deb taajjublanarmish,,no,rest of the flagged group
+9,182862732_1_1495_1,data/raw/usc/train/182862732/182862732_1_1495_1.flac,clipped 2.52% > 1.00%,beshinchi qavatga chiqdi,,no,rest of the flagged group
+9,182862732_1_1496_1,data/raw/usc/train/182862732/182862732_1_1496_1.flac,clipped 2.67% > 1.00%,qo'ng'irok tugmasini bosishgan edi,,no,rest of the flagged group
+9,182862732_1_1497_1,data/raw/usc/train/182862732/182862732_1_1497_1.flac,clipped 3.54% > 1.00%,asror eshik qo'ng'irog'ining asabiy jarangidan sapchib turib ketdi,,no,rest of the flagged group
+9,182862732_1_1499_1,data/raw/usc/train/182862732/182862732_1_1499_1.flac,clipped 4.09% > 1.00%,onasining hozir degan ovozini eshitdi,,no,rest of the flagged group
+9,182862732_1_1502_1,data/raw/usc/train/182862732/182862732_1_1502_1.flac,clipped 2.86% > 1.00%,sal o'ziga keldi,,no,rest of the flagged group
+9,182862732_1_1503_1,data/raw/usc/train/182862732/182862732_1_1503_1.flac,clipped 4.66% > 1.00%,vujudida jon pon qolmaganini shundagina xis qildi,,no,rest of the flagged group
+9,182862732_1_1505_1,data/raw/usc/train/182862732/182862732_1_1505_1.flac,clipped 4.54% > 1.00%,sovqatgan odamday badaniga yengil titroq turdi,,no,rest of the flagged group
+9,182862732_1_1506_1,data/raw/usc/train/182862732/182862732_1_1506_1.flac,clipped 5.01% > 1.00%,onasi turdingmi bolaginam dedi,,no,rest of the flagged group
+9,182862732_1_1508_1,data/raw/usc/train/182862732/182862732_1_1508_1.flac,clipped 4.08% > 1.00%,xech qayoqqa chiqmayman,,no,rest of the flagged group
+9,182862732_1_1509_1,data/raw/usc/train/182862732/182862732_1_1509_1.flac,clipped 4.72% > 1.00%,uyda yotib olganimdan shubhalanishsa chi,,no,rest of the flagged group
+9,182862732_1_1510_1,data/raw/usc/train/182862732/182862732_1_1510_1.flac,clipped 3.40% > 1.00%,degan uy xayoliga kelib boshini ko'tardi,,no,rest of the flagged group
+9,182862732_1_1511_1,data/raw/usc/train/182862732/182862732_1_1511_1.flac,clipped 3.73% > 1.00%,keyin muncha qurqaman axir uni meni uldirganim yuk ku,,no,rest of the flagged group
+9,182862732_1_1513_1,data/raw/usc/train/182862732/182862732_1_1513_1.flac,clipped 4.67% > 1.00%,men o'ldirganim yo'q,,no,rest of the flagged group
+9,182862732_1_1517_1,data/raw/usc/train/182862732/182862732_1_1517_1.flac,clipped 4.16% > 1.00%,sal yengil tortdi,,no,rest of the flagged group
+9,182862732_1_1519_1,data/raw/usc/train/182862732/182862732_1_1519_1.flac,clipped 3.31% > 1.00%,uzini majburlab nonushta qildi,,no,rest of the flagged group
+9,182862732_1_1521_1,data/raw/usc/train/182862732/182862732_1_1521_1.flac,clipped 4.32% > 1.00%,chiqdi yu beixtiyor atrofga alanglab qaradi,,no,rest of the flagged group
+9,182862732_1_1522_1,data/raw/usc/train/182862732/182862732_1_1522_1.flac,clipped 3.60% > 1.00%,burchakdagi uy qarshisida dilfuza uni poylayotganini sezdi,,no,rest of the flagged group
+9,182862732_1_1524_1,data/raw/usc/train/182862732/182862732_1_1524_1.flac,clipped 3.01% > 1.00%,birga maktabga ketishardi,,no,rest of the flagged group
+9,182862732_1_1525_1,data/raw/usc/train/182862732/182862732_1_1525_1.flac,clipped 4.33% > 1.00%,dilfuza uni jilmayib qarshi oldi,,no,rest of the flagged group
+9,182862732_1_1526_1,data/raw/usc/train/182862732/182862732_1_1526_1.flac,clipped 3.65% > 1.00%,xozir mahzun bir ahvolda turar edi,,no,rest of the flagged group
+9,182862732_1_1527_1,data/raw/usc/train/182862732/182862732_1_1527_1.flac,clipped 2.29% > 1.00%,u ham uxlamaganga uxshaydi,,no,rest of the flagged group
+9,182862732_1_1528_1,data/raw/usc/train/182862732/182862732_1_1528_1.flac,clipped 3.30% > 1.00%,deb o'yladi asror,,no,rest of the flagged group
+9,182862732_1_1529_2,data/raw/usc/train/182862732/182862732_1_1529_2.flac,clipped 3.32% > 1.00%,bosh og'rir edi va ular salomlashishdi,,no,rest of the flagged group
+9,182862732_1_1530_1,data/raw/usc/train/182862732/182862732_1_1530_1.flac,clipped 4.73% > 1.00%,xuddi urishib qolganday indamasdan yurishdi,,no,rest of the flagged group
+9,182862732_1_1531_1,data/raw/usc/train/182862732/182862732_1_1531_1.flac,clipped 6.15% > 1.00%,endi nima buladi dedi dilfuza past ovozda,,no,rest of the flagged group
+9,182862732_1_1532_1,data/raw/usc/train/182862732/182862732_1_1532_1.flac,clipped 4.09% > 1.00%,asror unga bir qarab oldi,,no,rest of the flagged group
+9,182862732_1_1533_1,data/raw/usc/train/182862732/182862732_1_1533_1.flac,clipped 4.05% > 1.00%,ammo javob qaytarmadi,,no,rest of the flagged group
+9,182862732_1_1534_1,data/raw/usc/train/182862732/182862732_1_1534_1.flac,clipped 4.82% > 1.00%,qamariddin boshlamagandaydi,,no,rest of the flagged group
+9,182862732_1_1535_1,data/raw/usc/train/182862732/182862732_1_1535_1.flac,clipped 3.23% > 1.00%,qamar boshlamadi,,no,rest of the flagged group
+9,182862732_1_1536_1,data/raw/usc/train/182862732/182862732_1_1536_1.flac,clipped 3.82% > 1.00%,nimaga uzi pichoq chiqaradi,,no,rest of the flagged group
+9,182862732_1_54233_2,data/raw/usc/train/182862732/182862732_1_54233_2.flac,clipped 1.09% > 1.00%,birdan yuzgacha yuzdan,,no,rest of the flagged group
+9,182862732_1_54234_1,data/raw/usc/train/182862732/182862732_1_54234_1.flac,clipped 2.03% > 1.00%,sanagani foyda berdimi yo,,no,rest of the flagged group
+9,182862732_1_54237_1,data/raw/usc/train/182862732/182862732_1_54237_1.flac,clipped 1.35% > 1.00%,ularni o'sha o'lgan,,no,rest of the flagged group
+9,182862732_1_54239_1,data/raw/usc/train/182862732/182862732_1_54239_1.flac,clipped 1.51% > 1.00%,asror uni ko'rgan sari tirik,,no,rest of the flagged group
+9,182862732_1_54246_1,data/raw/usc/train/182862732/182862732_1_54246_1.flac,clipped 1.55% > 1.00%,eshik ochilgandan keyin qo'shni ayolning,,no,rest of the flagged group
+9,182862732_1_54247_1,data/raw/usc/train/182862732/182862732_1_54247_1.flac,clipped 2.70% > 1.00%,aylanay deganini eshitdi,,no,rest of the flagged group
+9,182862732_1_54251_1,data/raw/usc/train/182862732/182862732_1_54251_1.flac,clipped 1.91% > 1.00%,sovqatgan odamday badaniga,,no,rest of the flagged group
+9,182862732_1_54257_1,data/raw/usc/train/182862732/182862732_1_54257_1.flac,clipped 1.56% > 1.00%,keyin muncha qurqaman axir,,no,rest of the flagged group
+9,182862732_1_54258_1,data/raw/usc/train/182862732/182862732_1_54258_1.flac,clipped 1.32% > 1.00%,o'ziga o'zi tasalli,,no,rest of the flagged group
+9,182862732_1_54267_1,data/raw/usc/train/182862732/182862732_1_54267_1.flac,clipped 2.09% > 1.00%,chiqdi yu beixtiyor,,no,rest of the flagged group
+9,182862732_1_54269_1,data/raw/usc/train/182862732/182862732_1_54269_1.flac,clipped 1.44% > 1.00%,ular har kuni,,no,rest of the flagged group
+9,182862732_1_54275_2,data/raw/usc/train/182862732/182862732_1_54275_2.flac,clipped 1.11% > 1.00%,bosh og'rir edi,,no,rest of the flagged group
+9,182862732_1_62774_2,data/raw/usc/train/182862732/182862732_1_62774_2.flac,clipped 1.46% > 1.00%,minggacha sanab yotdi,,no,rest of the flagged group
+9,182862732_1_62775_1,data/raw/usc/train/182862732/182862732_1_62775_1.flac,clipped 1.60% > 1.00%,uyqusizlik yengdimi uxlab qoldi,,no,rest of the flagged group
+9,182862732_1_62780_1,data/raw/usc/train/182862732/182862732_1_62780_1.flac,clipped 1.43% > 1.00%,ekan ku deb xursand bo'larmish,,no,rest of the flagged group
+9,182862732_1_62781_1,data/raw/usc/train/182862732/182862732_1_62781_1.flac,clipped 1.37% > 1.00%,qotilni izlashyapti deb taajjublanarmish,,no,rest of the flagged group
+9,182862732_1_62787_1,data/raw/usc/train/182862732/182862732_1_62787_1.flac,clipped 2.12% > 1.00%,ma'sumaxon ikkitagina tuxum berib turing,,no,rest of the flagged group
+9,182862732_1_62792_1,data/raw/usc/train/182862732/182862732_1_62792_1.flac,clipped 1.95% > 1.00%,yengil titroq turdi,,no,rest of the flagged group
+9,182862732_1_62797_1,data/raw/usc/train/182862732/182862732_1_62797_1.flac,clipped 1.25% > 1.00%,kelib boshini ko'tardi,,no,rest of the flagged group
+9,182862732_1_62798_1,data/raw/usc/train/182862732/182862732_1_62798_1.flac,clipped 2.06% > 1.00%,uni meni uldirganim yuk ku,,no,rest of the flagged group
+9,182862732_1_62809_1,data/raw/usc/train/182862732/182862732_1_62809_1.flac,clipped 1.32% > 1.00%,dilfuza uni poylayotganini sezdi,,no,rest of the flagged group
+9,182862732_1_62813_1,data/raw/usc/train/182862732/182862732_1_62813_1.flac,clipped 1.76% > 1.00%,ahvolda turar edi,,no,rest of the flagged group
+9,182862732_1_62816_2,data/raw/usc/train/182862732/182862732_1_62816_2.flac,clipped 1.04% > 1.00%,va ular salomlashishdi,,no,rest of the flagged group
+9,182862732_1_62818_1,data/raw/usc/train/182862732/182862732_1_62818_1.flac,clipped 1.92% > 1.00%,dedi dilfuza past ovozda,,no,rest of the flagged group
+9,19_E_19_E-64,data/raw/usc/train/19_E/19_E_19_E-64.flac,clipped 1.48% > 1.00%,muhandislik tayyorgarligi,,no,rest of the flagged group
+9,19_E_19_E-65,data/raw/usc/train/19_E/19_E_19_E-65.flac,clipped 2.52% > 1.00%,muhandislik tuzilmasi,,no,rest of the flagged group
+9,19_E_19_E-66,data/raw/usc/train/19_E/19_E_19_E-66.flac,clipped 3.45% > 1.00%,bosh reja,,no,rest of the flagged group
+9,551585738_1_64527_4,data/raw/usc/train/551585738/551585738_1_64527_4.flac,SNR 7.7 dB < 8.4,nasabi noma'lum bo'lgani uchun,,no,rest of the flagged group
+9,554171577_1_92860_2,data/raw/usc/train/554171577/554171577_1_92860_2.flac,SNR 8.2 dB < 8.4,foydalangan holda unga,,no,rest of the flagged group
+9,958808950_1_4018_2,data/raw/usc/train/958808950/958808950_1_4018_2.flac,SNR 8.2 dB < 8.4,uyalganimizdan yuziga qarayolmasak,,yes,rest of the flagged group
+9,fonarchi_data_fonarchi-117,data/raw/usc/train/fonarchi/fonarchi_data_fonarchi-117.flac,clipped 2.12% > 1.00%,yolg'on yolg'on,,no,rest of the flagged group
+9,jamila8.1_data_jamila8.1-38,data/raw/usc/train/jamila8.1/jamila8.1_data_jamila8.1-38.flac,SNR 7.7 dB < 8.4,uyi yo'q,,no,rest of the flagged group

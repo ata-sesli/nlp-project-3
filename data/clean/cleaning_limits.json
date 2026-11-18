@@ -1,0 +1,36 @@
+{
+  "letters_per_second": {
+    "low": 3.1,
+    "high": 35.95,
+    "how": "Tukey far-out fences (3*IQR) on log(letters / trimmed seconds) of train clips"
+  },
+  "snr_db": {
+    "low": 8.37,
+    "how": "Tukey outlier fence (Q1 - 1.5*IQR) of train clips; SNR = 95th - 10th percentile frame dB"
+  },
+  "clipped_share": {
+    "high": 0.01,
+    "how": "share of samples at int16 full scale"
+  },
+  "silence": {
+    "frame_db_below_peak": 35.0,
+    "min_trim_s": 0.5,
+    "kept_s": 0.2
+  },
+  "silent_peak_int16": 64,
+  "rule8_flagged_clips": 475,
+  "by_ear": {
+    "8": {
+      "result": "confirmed",
+      "sampled": 50,
+      "yes": 32,
+      "no": 18
+    },
+    "9": {
+      "result": "rejected",
+      "sampled": 97,
+      "yes": 2,
+      "no": 95
+    }
+  }
+}
