@@ -1,0 +1,105 @@
+{
+  "training": {
+    "start_model": "nvidia/stt_uz_fastconformer_hybrid_large_pc",
+    "start_revision": "cd32f63d620a7b0cb461ed00ecfc45c852eb0bef",
+    "parameters": 114621442,
+    "seed": 42,
+    "train_data": {
+      "clips": 27144,
+      "hours": 23.922
+    },
+    "hyperparameters": {
+      "revision": null,
+      "start_nemo": null,
+      "clean_dir": null,
+      "lr": 0.0004,
+      "warmup_steps": 500,
+      "min_lr": 1e-06,
+      "weight_decay": 0.001,
+      "batch_size": 16,
+      "grad_accum": 2,
+      "epochs": 27,
+      "max_hours": 7.5,
+      "val_limit": 1000,
+      "max_train_seconds": 30.0,
+      "num_workers": 4,
+      "precision": "32-true",
+      "max_start_wer": 0.5,
+      "limit_train": null,
+      "no_start_check": false,
+      "no_save": false,
+      "memory_probe": false,
+      "optimizer": "AdamW (0.9, 0.98)",
+      "scheduler": "warmup + cosine annealing",
+      "tokenizer": "the start model's own SentencePiece tokenizer (unchanged)",
+      "apostrophe_in_targets": "o'/g' -> oʻ/gʻ (U+02BB), other ' -> ’ (U+2019)",
+      "heads": "transducer + CTC trained together"
+    },
+    "training": {
+      "epochs_done": 27,
+      "best_epoch": 21,
+      "best_dev_check_wer": 0.11040693521499634,
+      "start_model_dev_check_wer": 0.4321214258670807,
+      "start_model_dev_check_wer_ctc": 0.4684789776802063,
+      "dev_check_clips": 1000,
+      "train_hours": 6.56
+    },
+    "env": {
+      "python": "3.13.16",
+      "torch": "2.11.0+cu130",
+      "torchaudio": "2.11.0+cu130",
+      "transformers": "5.23.0",
+      "nemo_toolkit": "3.0.0",
+      "jiwer": "4.0.0",
+      "soundfile": "0.14.0",
+      "numpy": "2.1.3",
+      "scipy": "1.16.3",
+      "huggingface_hub": "2.4.0",
+      "safetensors": "0.8.0",
+      "cuda": "13.0",
+      "gpu": "Tesla T4"
+    }
+  },
+  "system": "C4a_fastconformer-usc-ft-rnnt",
+  "model": "NVIDIA Uzbek FastConformer hybrid, fine-tuned by us on USC train (nvidia_finetune/)",
+  "prediction_model": {
+    "source": "/kaggle/working/c4_run/best.nemo",
+    "revision": null
+  },
+  "decoder": "transducer greedy",
+  "parameters": 114621442,
+  "seed": 42,
+  "env": {
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "torchaudio": "2.11.0+cu130",
+    "transformers": "5.23.0",
+    "nemo_toolkit": "3.0.0",
+    "jiwer": "4.0.0",
+    "soundfile": "0.14.0",
+    "numpy": "2.1.3",
+    "scipy": "1.16.3",
+    "huggingface_hub": "2.4.0",
+    "safetensors": "0.8.0",
+    "cuda": "13.0",
+    "gpu": "Tesla T4"
+  },
+  "runs": {
+    "dev": {
+      "clips": 3783,
+      "wer_quick": 0.116,
+      "cer_quick": 0.0393,
+      "rtf": 0.0039,
+      "audio_hours": 3.947,
+      "limit": null
+    }
+  },
+  "notes": {
+    "wer_quick": "normalized WER from common/asr_data.py; the official numbers come from benchmark/evaluate.py"
+  },
+  "huggingface": {
+    "repo": "Waxech/stt-uz-fastconformer-usc",
+    "revision": "c9f61252101cb09f65fd0f21eabede5e63b4b48f",
+    "file": "stt_uz_fastconformer_usc_ft.nemo"
+  }
+}

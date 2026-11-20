@@ -1,0 +1,93 @@
+{
+  "system": "C2long_xlsr-300m-ctc",
+  "model_id": "Waxech/xls-r-300m-uzbek-usc",
+  "revision": "839362d772f4321605d2812f1ac1c75e89cb04d4",
+  "parameters": 315469470,
+  "trainable_parameters": 311259294,
+  "seed": 42,
+  "train_data": {
+    "clips": 27144,
+    "hours": 23.922,
+    "skipped_too_long": 0,
+    "skipped_empty_text": 0
+  },
+  "hyperparameters": {
+    "model_id": "Waxech/xls-r-300m-uzbek-usc",
+    "revision": null,
+    "lr": 0.0001,
+    "warmup_steps": 300,
+    "batch_size": 8,
+    "grad_accum": 4,
+    "epochs": 20,
+    "max_steps": null,
+    "max_hours": 7.5,
+    "no_fit_to_time": false,
+    "eval_every": 1000,
+    "save_every": 500,
+    "eval_batch_size": 16,
+    "max_train_seconds": 30.0,
+    "num_workers": 4,
+    "weight_decay": 0.0,
+    "mask_time_prob": 0.05,
+    "no_grad_checkpointing": false,
+    "limit_train": null,
+    "limit_dev": null,
+    "tiny": false,
+    "effective_batch": 32,
+    "steps_per_epoch": 849,
+    "planned_steps": 16980,
+    "total_steps": 16199,
+    "scheduler": "linear warmup + linear decay",
+    "optimizer": "AdamW",
+    "fp16": true,
+    "feature_encoder": "frozen",
+    "dropouts": "attention/hidden/feat_proj 0.0, layerdrop 0.0"
+  },
+  "training": {
+    "finished": true,
+    "steps_done": 16199,
+    "best_step": 16000,
+    "best_dev_wer_quick": 0.3257821887934488,
+    "train_hours": 6.59
+  },
+  "chosen_checkpoint": "step 16000 (lowest dev WER)",
+  "env": {
+    "python": "3.13.16",
+    "torch": "2.11.0+cu130",
+    "torchaudio": "2.11.0+cu130",
+    "transformers": "5.23.0",
+    "nemo_toolkit": "3.0.0",
+    "jiwer": "4.0.0",
+    "soundfile": "0.14.0",
+    "numpy": "2.1.3",
+    "scipy": "1.16.3",
+    "huggingface_hub": "2.4.0",
+    "safetensors": "0.8.0",
+    "cuda": "13.0",
+    "gpu": "Tesla T4"
+  },
+  "decoder": "CTC greedy (no LM)",
+  "prediction_model": {
+    "source": "/kaggle/working/xlsr_long/best",
+    "revision": null,
+    "chosen": {
+      "step": 16000,
+      "dev_wer": 0.3257821887934488,
+      "dev_cer": 0.0804961778029445
+    }
+  },
+  "runs": {
+    "dev": {
+      "clips": 3783,
+      "wer_quick": 0.3258,
+      "cer_quick": 0.0805,
+      "rtf": 0.00344,
+      "audio_hours": 3.947,
+      "gpu": "Tesla T4",
+      "limit": null
+    }
+  },
+  "notes": {
+    "wer_quick": "normalized WER from common/asr_data.py; the official numbers come from benchmark/evaluate.py"
+  }
+}

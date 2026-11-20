@@ -1,0 +1,33 @@
+{
+  "method": "each learning rate trains 1 epoch from the start model (AdamW, warmup 100 steps, cosine); WER of the transducer head on the same fixed sample of 1,000 dev clips (seed 42)",
+  "results": [
+    {
+      "lr": 5e-05,
+      "dev_check_wer": 0.1408,
+      "dev_check_wer_ctc": 0.1669,
+      "sec_per_step": 1.006
+    },
+    {
+      "lr": 0.0001,
+      "dev_check_wer": 0.1258,
+      "dev_check_wer_ctc": 0.1486,
+      "sec_per_step": 1.007
+    },
+    {
+      "lr": 0.0002,
+      "dev_check_wer": 0.1237,
+      "dev_check_wer_ctc": 0.1343,
+      "sec_per_step": 0.999
+    },
+    {
+      "lr": 0.0004,
+      "dev_check_wer": 0.1147,
+      "dev_check_wer_ctc": 0.1251,
+      "sec_per_step": 1.011
+    }
+  ],
+  "chosen_lr": 0.0004,
+  "batch": "16 x 2 accumulation steps",
+  "full_run_epochs": 27,
+  "minutes_per_epoch_estimate": 14.5
+}
