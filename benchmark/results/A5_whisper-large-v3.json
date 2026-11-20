@@ -1,0 +1,34 @@
+{
+  "system": "A5_whisper-large-v3",
+  "model_id": "openai/whisper-large-v3",
+  "revision": "06f233fe06e710322aca913c1bc4249a0d71fce1",
+  "parameters": 1543490560,
+  "decoding": {
+    "language": "uzbek",
+    "task": "transcribe",
+    "num_beams": 1,
+    "max_new_tokens": 225,
+    "dtype": "float16",
+    "batch_size": 32
+  },
+  "seed": 42,
+  "hardware": "NVIDIA A100-SXM4-40GB",
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130",
+  "transformers": "5.23.0",
+  "runs": {
+    "dev": {
+      "clips": 3783,
+      "audio_hours": 3.947,
+      "rtf": 0.02442,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "provisional_scores": {
+        "wer": 0.9631492278250033,
+        "cer": 0.34283371771353743,
+        "n_scored": 3783
+      },
+      "predictions": "benchmark/predictions/A5_whisper-large-v3__dev.jsonl"
+    }
+  }
+}

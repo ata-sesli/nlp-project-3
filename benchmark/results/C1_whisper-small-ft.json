@@ -1,0 +1,96 @@
+{
+  "system": "C1_whisper-small-ft",
+  "base_model_id": "openai/whisper-small",
+  "base_revision": "973afd24965f72e36ca33b3055d56a652f456b4d",
+  "parameters": 241734912,
+  "hyperparameters": {
+    "learning_rate": 1e-05,
+    "warmup_steps": 500,
+    "max_steps": 4000,
+    "per_device_batch_size": 32,
+    "grad_accum": 1,
+    "effective_batch_size": 32,
+    "precision": "bf16",
+    "scheduler": "linear",
+    "spec_augment": false,
+    "eval_every_steps": 500
+  },
+  "seed": 42,
+  "hardware": "NVIDIA A100-SXM4-40GB",
+  "python": "3.13.16",
+  "torch": "2.14.1+cu130",
+  "transformers": "5.23.0",
+  "model_id": "akifkulll/whisper-small-uzbek-usc25h",
+  "revision": "b38781ed83b508cbd44ce5fdcefa488efe849d29",
+  "decoding": {
+    "language": "uzbek",
+    "task": "transcribe",
+    "num_beams": 1,
+    "max_new_tokens": 225,
+    "dtype": "float16",
+    "batch_size": 64
+  },
+  "runs": {
+    "train": {
+      "train_clips": 27144,
+      "train_hours": 23.922,
+      "selected_checkpoint": "checkpoint-3000",
+      "best_dev_wer_during_training": 0.33851083715341135,
+      "dev_wer_history": [
+        {
+          "step": 500,
+          "wer": 0.4942365036272197,
+          "cer": 0.13157599815969376
+        },
+        {
+          "step": 1000,
+          "wer": 0.407717299390271,
+          "cer": 0.12293481658870925
+        },
+        {
+          "step": 1500,
+          "wer": 0.37206818282967646,
+          "cer": 0.11417566666863281
+        },
+        {
+          "step": 2000,
+          "wer": 0.3604076727936268,
+          "cer": 0.11760854562720822
+        },
+        {
+          "step": 2500,
+          "wer": 0.348613645467088,
+          "cer": 0.10923869125913517
+        },
+        {
+          "step": 3000,
+          "wer": 0.33851083715341135,
+          "cer": 0.10031438565033002
+        },
+        {
+          "step": 3500,
+          "wer": 0.3426053673950777,
+          "cer": 0.10286840040817048
+        },
+        {
+          "step": 4000,
+          "wer": 0.3398905158217989,
+          "cer": 0.10124633560815634
+        }
+      ]
+    },
+    "dev": {
+      "clips": 3783,
+      "audio_hours": 3.947,
+      "rtf": 0.00561,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "provisional_scores": {
+        "wer": 0.3383328140994259,
+        "cer": 0.09988969959359904,
+        "n_scored": 3783
+      },
+      "predictions": "benchmark/predictions/C1_whisper-small-ft__dev.jsonl"
+    }
+  }
+}
