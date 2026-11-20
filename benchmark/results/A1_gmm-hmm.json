@@ -1,0 +1,62 @@
+{
+  "system": "A1_gmm-hmm",
+  "model_id": "Kaldi GMM-HMM tri3b: triphone LDA+MLLT+SAT (fMLLR), trained by us",
+  "revision": null,
+  "parameters": null,
+  "gaussians": 15015,
+  "toolkit": {
+    "kaldi_conda_forge": "5.5.1172",
+    "kaldi_scripts_commit": null
+  },
+  "features": "13 MFCC + per-speaker CMVN (+deltas / LDA+MLLT / fMLLR by stage)",
+  "lexicon": "graphemes; o', g', sh, ch, ng and ' are one unit each",
+  "lm": "LM: baselines/gmm_hmm/lm_arpa.py (interpolated Kneser-Ney 3-gram, train transcripts)",
+  "decoding": {
+    "lmwt": 16,
+    "word_ins_penalty": 1.5,
+    "selected_on": "dev",
+    "grid_lmwt": [
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22
+    ],
+    "grid_wip": [
+      0.0,
+      0.5,
+      1.0,
+      1.5,
+      2.0
+    ]
+  },
+  "seed": 42,
+  "hardware": "CPU: AMD EPYC 7B12, 8 parallel jobs",
+  "python": "3.12.16",
+  "runs": {
+    "dev": {
+      "clips": 3783,
+      "decoded": 3779,
+      "audio_hours": 3.947,
+      "rtf": 0.17846,
+      "data_source": "data/clean CSV",
+      "provisional_scores": {
+        "wer": 0.5360719213138101,
+        "cer": 0.24662463061160692,
+        "n_scored": 3783
+      },
+      "predictions": "benchmark/predictions/A1_gmm-hmm__dev.jsonl"
+    }
+  }
+}
