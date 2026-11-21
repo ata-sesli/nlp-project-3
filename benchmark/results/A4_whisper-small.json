@@ -12,7 +12,7 @@
     "batch_size": 64
   },
   "seed": 42,
-  "hardware": "NVIDIA A100-SXM4-40GB",
+  "hardware": "Tesla T4",
   "python": "3.13.16",
   "torch": "2.14.1+cu130",
   "transformers": "5.23.0",
@@ -28,7 +28,32 @@
         "cer": 0.6747258710487976,
         "n_scored": 3783
       },
-      "predictions": "benchmark/predictions/A4_whisper-small__dev.jsonl"
+      "predictions": "benchmark/predictions/A4_whisper-small__dev.jsonl",
+      "environment": {
+        "hardware": "NVIDIA A100-SXM4-40GB",
+        "python": "3.13.16",
+        "torch": "2.14.1+cu130",
+        "transformers": "5.23.0"
+      }
+    },
+    "test": {
+      "clips": 3836,
+      "audio_hours": 4.402,
+      "rtf": 0.0379,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "provisional_scores": {
+        "wer": 1.1987428360140506,
+        "cer": 0.5319096590070364,
+        "n_scored": 3836
+      },
+      "predictions": "benchmark/predictions/A4_whisper-small__test.jsonl",
+      "environment": {
+        "hardware": "Tesla T4",
+        "python": "3.13.16",
+        "torch": "2.14.1+cu130",
+        "transformers": "5.23.0"
+      }
     }
   }
 }
