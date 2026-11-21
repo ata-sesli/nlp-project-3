@@ -56,7 +56,28 @@
         "cer": 0.24662463061160692,
         "n_scored": 3783
       },
-      "predictions": "benchmark/predictions/A1_gmm-hmm__dev.jsonl"
+      "predictions": "benchmark/predictions/A1_gmm-hmm__dev.jsonl",
+      "environment": {
+        "hardware": "CPU: AMD EPYC 7B12, 8 parallel jobs",
+        "python": "3.12.16"
+      }
+    },
+    "test": {
+      "clips": 3836,
+      "decoded": 3835,
+      "audio_hours": 4.402,
+      "rtf": 0.21749,
+      "data_source": "data/clean CSV",
+      "provisional_scores": {
+        "wer": 0.6012201885745979,
+        "cer": 0.2876888254686808,
+        "n_scored": 3836
+      },
+      "predictions": "benchmark/predictions/A1_gmm-hmm__test.jsonl",
+      "environment": {
+        "hardware": "CPU: AMD EPYC 7B12, 8 parallel jobs",
+        "python": "3.12.16"
+      }
     }
   }
 }

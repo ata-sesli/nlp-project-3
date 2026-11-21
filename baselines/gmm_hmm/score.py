@@ -100,7 +100,11 @@ def main() -> None:
         best = min(grid, key=lambda g: g["wer"])
         params_file.write_text(json.dumps({"best": best, "grid": grid}, indent=2), encoding="utf-8")
     else:
-        best = json.loads(params_file.read_text(encoding="utf-8"))["best"]
+        saved = json.loads(params_file.read_text(encoding="utf-8"))
+        best = saved["best"]
+        # report the grid that was searched on dev, not this run's defaults
+        args.lmwt = sorted({g["lmwt"] for g in saved["grid"]})
+        args.wip = sorted({g["wip"] for g in saved["grid"]})
     hyps = hyps_for(best["lmwt"], best["wip"])
 
     pred = wc.write_predictions(SYSTEM, args.split, [r["id"] for r in rows], hyps)
@@ -108,7 +112,10 @@ def main() -> None:
     audio_s = sum(r["end_s"] - r["start_s"] for r in rows)
     timing = args.work / "exp" / f"timing_{args.split}.txt"
     wall_s = sum(float(x) for x in timing.read_text().split()) if timing.exists() else None
-    lm_source = (args.work / "data" / "local" / "lm_source.txt").read_text(encoding="utf-8").strip()
+    # written by stage 2; missing when only the saved models were restored (eval-only test run)
+    lm_file = args.work / "data" / "local" / "lm_source.txt"
+    lm_source = (lm_file.read_text(encoding="utf-8").strip() if lm_file.exists() else
+                 "LM: baselines/gmm_hmm/lm_arpa.py (interpolated Kneser-Ney 3-gram, train transcripts)")
 
     log = wc.write_run_log(SYSTEM, args.split, {
         "system": SYSTEM,
