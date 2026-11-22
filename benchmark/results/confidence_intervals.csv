@@ -9,6 +9,10 @@ A4_whisper-small,test,wer_norm,3836,38,1.198839,1.143804,1.296122,10000
 A4_whisper-small,test,cer_norm,3836,38,0.531816,0.452679,0.650765,10000
 A5_whisper-large-v3,test,wer_norm,3836,38,0.936580,0.888140,0.980852,10000
 A5_whisper-large-v3,test,cer_norm,3836,38,0.326871,0.282118,0.398494,10000
+A6_mms-1b,test,wer_norm,3836,38,0.293802,0.226635,0.354716,10000
+A6_mms-1b,test,cer_norm,3836,38,0.066048,0.047459,0.087920,10000
+A7_xls-r-uzbek-cv8,test,wer_norm,3836,38,0.407144,0.339776,0.444729,10000
+A7_xls-r-uzbek-cv8,test,cer_norm,3836,38,0.087757,0.067379,0.100333,10000
 A8_nvidia-fastconformer-rnnt,test,wer_norm,3836,38,0.120664,0.079560,0.149597,10000
 A8_nvidia-fastconformer-rnnt,test,cer_norm,3836,38,0.036533,0.025593,0.049375,10000
 A9_nvidia-fastconformer-ctc,test,wer_norm,3836,38,0.130834,0.088612,0.166785,10000
