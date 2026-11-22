@@ -1,8 +1,8 @@
-﻿\# Uzbek Speech Recognition: Experimental Report
+# Uzbek Speech Recognition: Experimental Report
 
 
 
-\## 1. Introduction
+## 1. Introduction
 
 
 
@@ -14,7 +14,7 @@ All systems are evaluated using a shared test set and a common normalization and
 
 
 
-\## 2. Dataset
+## 2. Dataset
 
 
 
@@ -25,18 +25,11 @@ The experiments use the Uzbek Speech Corpus provided by ISSAI.
 The project constructs speaker-disjoint training, development, and test splits. Development and test speakers are excluded from the training selection to prevent speaker overlap.
 
 
-
 | Split | Clips | Speakers | Audio duration |
-
 |---|---:|---:|---:|
-
 | Train | 27,144 | Speaker-disjoint | 23.92 hours |
-
 | Development | 3,783 | 41 | 3.95 hours |
-
 | Test | 3,836 | 38 | 4.40 hours |
-
-
 
 The training split was selected under a 25-hour audio budget. After cleaning, 23.92 hours were retained. The development and test splits were kept complete, apart from the documented cleaning and correction procedures.
 
@@ -46,7 +39,7 @@ Data preparation includes audio validation, transcript normalization, duplicate-
 
 
 
-\## 3. Experimental Systems
+## 3. Experimental Systems
 
 
 
@@ -54,49 +47,33 @@ The evaluated systems are divided into two main groups.
 
 
 
-\### 3.1. Baseline systems
+### 3.1. Baseline systems
 
 
 
-\- A1: GMM-HMM trained using Kaldi.
-
-\- A2: Conformer-CTC trained from scratch.
-
-\- A3: Conformer-RNNT trained from scratch.
-
-\- A4: Whisper-small, zero-shot.
-
-\- A5: Whisper-large-v3, zero-shot.
+- A1: GMM-HMM trained using Kaldi.
+- A2: Conformer-CTC trained from scratch.
+- A3: Conformer-RNNT trained from scratch.
+- A4: Whisper-small, zero-shot.
+- A5: Whisper-large-v3, zero-shot.
 - A6: Meta MMS-1B with the Uzbek Latin language adapter, zero-shot on USC.
 - A7: XLS-R Uzbek Common Voice 8, zero-shot on USC.
-
-\- A8: NVIDIA Uzbek FastConformer, zero-shot RNNT.
-
-\- A9: NVIDIA Uzbek FastConformer, zero-shot CTC.
-
-
-
-\### 3.2. Fine-tuned systems
+- A8: NVIDIA Uzbek FastConformer, zero-shot RNNT.
+- A9: NVIDIA Uzbek FastConformer, zero-shot CTC.
+### 3.2. Fine-tuned systems
 
 
 
-\- C1: Whisper-small fine-tuned on the project training data.
-
-\- C2: XLS-R 300M with CTC fine-tuning.
-
-\- C2long: Extended training of XLS-R 300M with CTC.
-
-\- C4a: NVIDIA FastConformer fine-tuned using the RNNT head.
-
-\- C4b: NVIDIA FastConformer fine-tuned using the CTC head.
-
-
-
+- C1: Whisper-small fine-tuned on the project training data.
+- C2: XLS-R 300M with CTC fine-tuning.
+- C2long: Extended training of XLS-R 300M with CTC.
+- C4a: NVIDIA FastConformer fine-tuned using the RNNT head.
+- C4b: NVIDIA FastConformer fine-tuned using the CTC head.
 The C4 experiments start from the pretrained NVIDIA Uzbek FastConformer hybrid model. The model contains approximately 114.6 million parameters. Fine-tuning uses the project training split and preserves the model's original SentencePiece tokenizer.
 
 
 
-\## 4. Evaluation Methodology
+## 4. Evaluation Methodology
 
 
 
@@ -128,36 +105,24 @@ For statistical uncertainty, speaker-level bootstrap confidence intervals are ca
 
 
 
-\## 5. Test Results
+## 5. Test Results
 
 
 
-\### 5.1. Baseline performance
-
+### 5.1. Baseline performance
 
 
 | System | WER | CER |
-
 |---|---:|---:|
-
 | A1 GMM-HMM | 60.1028% | 28.7577% |
-
 | A2 Conformer-CTC | 50.1738% | 13.9743% |
-
 | A3 Conformer-RNNT | 42.1862% | 16.2412% |
-
 | A4 Whisper-small | 119.8839% | 53.1816% |
-
 | A5 Whisper-large-v3 | 93.6580% | 32.6871% |
 | A6 MMS-1B Uzbek | 29.3802% | 6.6048% |
 | A7 XLS-R Uzbek CV8 | 40.7144% | 8.7757% |
-
 | A8 NVIDIA FastConformer RNNT | 12.0664% | 3.6533% |
-
 | A9 NVIDIA FastConformer CTC | 13.0834% | 3.6124% |
-
-
-
 Among the evaluated baseline systems, NVIDIA FastConformer RNNT achieves the lowest WER, while NVIDIA FastConformer CTC achieves the lowest CER.
 
 
@@ -166,26 +131,16 @@ The Whisper zero-shot systems perform substantially worse on this test set than 
 
 
 
-\### 5.2. Fine-tuned performance
-
+### 5.2. Fine-tuned performance
 
 
 | System | WER | CER |
-
 |---|---:|---:|
-
 | C1 Whisper-small fine-tuned | 35.5262% | 9.8929% |
-
 | C2 XLS-R 300M CTC | 35.4042% | 8.4513% |
-
 | C2long XLS-R 300M extended | 32.9598% | 7.7840% |
-
 | C4a FastConformer RNNT fine-tuned | 11.3823% | 3.4067% |
-
 | C4b FastConformer CTC fine-tuned | 12.2476% | 3.3132% |
-
-
-
 C4a achieves the lowest WER among all evaluated systems. C4b achieves the lowest CER.
 
 
@@ -194,52 +149,34 @@ Fine-tuning the NVIDIA FastConformer improves both WER and CER relative to its c
 
 
 
-\## 6. Inference Efficiency
+## 6. Inference Efficiency
 
 
 
 The recorded inference results show that the neural systems can process the test audio substantially faster than real time.
 
 
-
 | System | RTF |
-
 |---|---:|
-
 | A1 GMM-HMM | 0.21749 |
-
 | A2 Conformer-CTC | 0.00062 |
-
 | A3 Conformer-RNNT | 0.00147 |
-
 | A4 Whisper-small | 0.03790 |
-
 | A5 Whisper-large-v3 | 0.08499 |
-
 | A6 MMS-1B Uzbek | 0.01178 |
 | A7 XLS-R Uzbek CV8 | 0.00546 |
-
 | A8 NVIDIA FastConformer RNNT | 0.00488 |
-
 | A9 NVIDIA FastConformer CTC | 0.00319 |
-
 | C1 Whisper-small fine-tuned | 0.02012 |
-
 | C2 XLS-R 300M CTC | 0.00384 |
-
 | C2long XLS-R extended | 0.00402 |
-
 | C4a FastConformer RNNT fine-tuned | 0.00433 |
-
 | C4b FastConformer CTC fine-tuned | 0.00321 |
-
-
-
 The reported GPU RTF measurements were obtained on a Tesla T4. A1 was measured on CPU hardware, so its RTF should not be interpreted as a direct hardware-controlled comparison with the GPU systems.
 
 
 
-\## 7. Statistical Analysis
+## 7. Statistical Analysis
 
 
 
@@ -251,30 +188,18 @@ For C4a compared with A8:
 
 
 
-\- WER difference: -0.006841.
-
-\- 95% confidence interval: \[-0.021013, 0.002505].
-
-\- Raw p-value: 0.191781.
-
-\- Holm-adjusted p-value: 0.237176.
-
-
-
+- WER difference: -0.006841.
+- 95% confidence interval: \[-0.021013, 0.002505].
+- Raw p-value: 0.191781.
+- Holm-adjusted p-value: 0.237176.
 For C4b compared with A9:
 
 
 
-\- WER difference: -0.008357.
-
-\- 95% confidence interval: \[-0.027040, 0.001403].
-
-\- Raw p-value: 0.118588.
-
-\- Holm-adjusted p-value: 0.237176.
-
-
-
+- WER difference: -0.008357.
+- 95% confidence interval: \[-0.027040, 0.001403].
+- Raw p-value: 0.118588.
+- Holm-adjusted p-value: 0.237176.
 Neither WER comparison is statistically significant after Holm correction. The confidence intervals include zero, so the observed improvements should not be interpreted as conclusive evidence of a population-level improvement.
 
 
@@ -283,17 +208,13 @@ The XLS-R extended experiment shows statistically significant improvements over 
 
 
 
-\- WER difference: -0.024443; Holm-adjusted p-value: 0.000800.
-
-\- CER difference: -0.006674; Holm-adjusted p-value: 0.000800.
-
-
-
+- WER difference: -0.024443; Holm-adjusted p-value: 0.000800.
+- CER difference: -0.006674; Holm-adjusted p-value: 0.000800.
 The Whisper-small fine-tuning comparison against its zero-shot baseline is also statistically significant in both WER and CER under the paired test.
 
 
 
-\## 8. Discussion
+## 8. Discussion
 
 
 
@@ -315,7 +236,7 @@ The statistical analysis also highlights the importance of uncertainty estimates
 
 
 
-\## 9. Reproducibility
+## 9. Reproducibility
 
 
 
@@ -327,27 +248,18 @@ Relevant components include:
 
 
 
-\- `data/`: dataset preparation, cleaning, normalization, and statistics.
-
-\- `baselines/`: baseline ASR systems.
-
-\- `whisper\_finetune/`: Whisper fine-tuning.
-
-\- `xlsr\_ctc/`: XLS-R fine-tuning.
-
-\- `nvidia\_finetune/`: NVIDIA FastConformer fine-tuning.
-
-\- `benchmark/`: evaluation, timing, statistical analysis, and predictions.
-
-\- `tests/`: automated tests for core project components.
-
-
-
+- `data/`: dataset preparation, cleaning, normalization, and statistics.
+- `baselines/`: baseline ASR systems.
+- `whisper\_finetune/`: Whisper fine-tuning.
+- `xlsr\_ctc/`: XLS-R fine-tuning.
+- `nvidia\_finetune/`: NVIDIA FastConformer fine-tuning.
+- `benchmark/`: evaluation, timing, statistical analysis, and predictions.
+- `tests/`: automated tests for core project components.
 The benchmark and statistical analysis can be reproduced using the scripts and environment requirements documented in the repository.
 
 
 
-\## 10. Conclusion
+## 10. Conclusion
 
 
 
@@ -364,7 +276,3 @@ The results support the effectiveness of Uzbek-oriented pretrained acoustic mode
 
 
 Future work could investigate larger training datasets, alternative decoding strategies, language-model integration, and more extensive evaluation across additional Uzbek speech domains.
-
-
-
-
