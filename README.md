@@ -55,6 +55,75 @@ Some dev and test sentences also appear word for word in train. Their clip IDs
 are in `data/clean/test_in_train.csv`, so scores can also be computed without
 them.
 
+## Metrics
+
+Every system is scored by one script, `benchmark/evaluate.py`, on the same
+clips, with `jiwer==4.0.0`. WER = (S + D + I) / N, where S, D and I are the
+substituted, deleted and inserted words and N is the number of reference words;
+errors and words are summed over all clips before dividing. CER is the same
+formula on characters. The choice of metrics follows the
+[Hugging Face Audio Course, Unit 5](https://huggingface.co/learn/audio-course/chapter5/evaluation).
+
+| Metric | What it measures | Why we report it |
+|---|---|---|
+| WER (norm), main metric | Word errors on normalized text | The standard ASR metric. Unit 5 recommends scoring normalized text so that casing and punctuation do not count as errors: some systems write them (the NVIDIA model, for example) and others, such as our CTC models, do not. |
+| CER (norm) | Character errors on normalized text | Uzbek is agglutinative: one word carries several suffixes, and one wrong suffix makes the whole word wrong in WER. CER gives credit for the correct part of the word. |
+| WER (orthographic) | WER on the text as written, with casing and punctuation | Unit 5 compares orthographic and normalized WER. The gap shows how much of a system's error is only casing and punctuation (A8: 49.25% orthographic, 12.07% normalized). |
+| WER (translit+number) | Normalized WER after converting Cyrillic to Latin and digits to Uzbek number words, in references and outputs | Not a main metric. Our normalization keeps digits and Cyrillic as they are, which counts against zero-shot Whisper (A5 wrote Cyrillic in 168 and digits in 105 of the 3,836 test outputs). This column shows how much that changes the score. |
+| WER 95% CI | Range of WER over 10,000 resamples of the test speakers | Clips of one speaker are not independent, so the speaker is resampled (`benchmark/significance.py`). Two systems whose intervals overlap may not really differ; `benchmark/results/significance.csv` has the paired tests. |
+| RTF and hardware | Processing time / audio duration | Speed next to accuracy. The GPU systems were measured on a Tesla T4; A1 runs on CPU, so its RTF is not comparable with theirs. |
+| Parameters | Model size | To compare large and small models fairly. |
+
+WER has no upper limit: a system that inserts many words can pass 100%
+(Unit 5), which is what happens with zero-shot Whisper-small (A4).
+
+Normalization (`data/normalize.py`, the same for references and outputs and
+for every system): lowercase; every apostrophe form (‘ ’ ` ʻ ʼ and others)
+becomes `'`; punctuation is removed, apostrophes inside a word are kept (oʻ,
+gʻ and the tutuq belgisi are part of the spelling); spaces are collapsed.
+Digits and Cyrillic are not converted; `scores.csv` counts the outputs that
+contain them (`hyp_with_digits`, `hyp_with_cyrillic`).
+
+## Results
+
+USC test split, all 3,836 clips. The tables are the output of
+`python -m benchmark.make_tables` (from `benchmark/results/scores.csv` and
+`benchmark/results/confidence_intervals.csv`); no number is typed by hand. A1,
+A2 and A3 are baselines we trained ourselves; the other rows of Table A are
+ready models used as they are. Dev scores are in the same `scores.csv`
+(`python -m benchmark.make_tables --split dev`).
+
+### Table A: Baselines (test)
+
+| System | WER (norm) | WER 95% CI | CER (norm) | WER (orthographic) | WER (translit+number) | RTF | Hardware | Parameters |
+|---|---:|---:|---:|---:|---:|---:|---|---:|
+| A1_gmm-hmm | 60.10% | [50.28%, 64.15%] | 28.76% | 60.12% | 60.10% | 0.21749 | CPU: AMD EPYC 7B12, 8 parallel jobs | —* |
+| A2_conformer-ctc | 50.17% | [40.80%, 54.24%] | 13.97% | 50.20% | 50.17% | 0.00062 | Tesla T4 | 20120861 |
+| A3_conformer-rnnt | 42.19% | [32.85%, 46.42%] | 16.24% | 42.20% | 42.19% | 0.00147 | Tesla T4 | 21146170 |
+| A4_whisper-small | 119.88% | [114.38%, 129.61%] | 53.18% | 120.05% | 119.81% | 0.03790 | Tesla T4 | 241734912 |
+| A5_whisper-large-v3 | 93.66% | [88.81%, 98.09%] | 32.69% | 97.48% | 93.18% | 0.08499 | Tesla T4 | 1543490560 |
+| A6_mms-1b | 29.38% | [22.66%, 35.47%] | 6.60% | 39.59% | 29.37% | 0.01178 | Tesla T4 | 964793329 |
+| A7_xls-r-uzbek-cv8 | 40.71% | [33.98%, 44.47%] | 8.78% | 49.66% | 40.71% | 0.00546 | Tesla T4 | 315472545 |
+| A8_nvidia-fastconformer-rnnt | 12.07% | [7.96%, 14.96%] | 3.65% | 49.25% | 12.07% | 0.00488 | Tesla T4 | 114621442 |
+| A9_nvidia-fastconformer-ctc | 13.08% | [8.86%, 16.68%] | 3.61% | 52.52% | 13.08% | 0.00319 | Tesla T4 | 114621442 |
+
+*\* A1 (GMM-HMM) is a classical acoustic model; instead of neural-network parameter counts, it is characterized by Gaussian mixture components and HMM states.*
+
+### Table B: Our Contribution (test)
+
+| System | WER (norm) | WER 95% CI | CER (norm) | WER (orthographic) | WER (translit+number) | RTF | Hardware | Parameters |
+|---|---:|---:|---:|---:|---:|---:|---|---:|
+| C1_whisper-small-ft | 35.53% | [27.31%, 39.28%] | 9.89% | 35.57% | 35.53% | 0.02012 | Tesla T4 | 241734912 |
+| C2_xlsr-300m-ctc | 35.40% | [27.22%, 39.14%] | 8.45% | 35.43% | 35.40% | 0.00384 | Tesla T4 | 315469470 |
+| C2long_xlsr-300m-ctc | 32.96% | [25.17%, 36.61%] | 7.78% | 33.01% | 32.96% | 0.00402 | Tesla T4 | 315469470 |
+| C4a_fastconformer-usc-ft-rnnt | 11.38% | [6.71%, 13.44%] | 3.41% | 24.44% | 11.38% | 0.00433 | Tesla T4 | 114621442 |
+| C4b_fastconformer-usc-ft-ctc | 12.25% | [7.40%, 14.45%] | 3.31% | 25.17% | 12.25% | 0.00321 | Tesla T4 | 114621442 |
+
+Paired comparisons (`benchmark/results/significance.csv`, Holm-adjusted):
+fine-tuning Whisper-small (C1 vs A4) and training XLS-R longer (C2long vs C2)
+lower WER and CER significantly (p = 0.0008). C4a and C4b score lower than A8
+and A9, but the difference is not significant (WER p = 0.24, CER p = 0.16).
+
 ## Listed models we did not run
 
 Every model on the course list that supports Uzbek was run (A4-A9). These
@@ -130,7 +199,7 @@ choose, and each was run once on dev and once on test.
 | `common/` | Helpers shared by `baselines/scratch/`, `baselines/nvidia_fastconformer/` and `xlsr_ctc/`: data loading, run logs, a fake dataset for smoke tests, version pinning |
 | `notebooks/kaggle_enes_models.ipynb` | Kaggle notebook that ran A2, A3, A8, A9, C2, C2long, C4 and the wrong-transcript scan |
 | `benchmark/evaluate.py` | Scores every prediction file against `data/clean/{dev,test}.csv` and writes `benchmark/results/scores.csv` |
-| `benchmark/make_tables.py` | Writes the result tables from `scores.csv` |
+| `benchmark/make_tables.py` | Writes the result tables in [Results](#results) from `scores.csv` and `confidence_intervals.csv` |
 | `benchmark/significance.py` | 95% confidence intervals of every system's WER and CER and p-values for the paired comparisons (fine-tuned vs start model), by speaker-level bootstrap; writes `benchmark/results/confidence_intervals.csv` and `benchmark/results/significance.csv` |
 | `benchmark/timing.py` | Shared real-time factor (RTF) timer |
 | `benchmark/predictions/` | One file per system and split, `<system>__<split>.jsonl`, with the model output for every clip |

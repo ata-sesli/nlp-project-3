@@ -10,6 +10,10 @@ def fmt_pct(val: str) -> str:
     return f"{float(val) * 100:.2f}%" if val not in ("", None, "None", "null") else "-"
 
 
+def fmt_rtf(val: str) -> str:
+    return f"{float(val):.5f}" if val not in ("", None, "None", "null") else "-"
+
+
 def fmt_ci(ci: Tuple[str, str] | None) -> str:
     if not ci:
         return "-"
@@ -49,7 +53,7 @@ def build_table(rows: List[Dict[str, str]], wer_cis: Dict[str, Tuple[str, str]])
         lines.append(
             f"| {sys_name} | {fmt_pct(r['wer_norm'])} | {fmt_ci(wer_cis.get(sys_name))} | "
             f"{fmt_pct(r['cer_norm'])} | {fmt_pct(r['wer_ortho'])} | "
-            f"{fmt_pct(r['wer_translit_num'])} | {r['rtf'] or '-'} | "
+            f"{fmt_pct(r['wer_translit_num'])} | {fmt_rtf(r['rtf'])} | "
             f"{r['hardware'] or '-'} | {fmt_params(sys_name, r['params'])} |"
         )
     return "\n".join(lines)
