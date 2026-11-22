@@ -46,7 +46,6 @@ METRICS = {"wer_norm": "word", "cer_norm": "char"}
 COMPARISONS = [
     ("C1", "A4"),      # Whisper-small: fine-tuned vs zero-shot
     ("C2long", "C2"),  # XLS-R: trained longer vs first run
-    ("C3", "C2"),      # XLS-R: + word LM vs greedy
     ("C4a", "A8"),     # NVIDIA transducer head: fine-tuned vs ready model
     ("C4b", "A9"),     # NVIDIA CTC head: fine-tuned vs ready model
 ]
