@@ -55,6 +55,44 @@ Some dev and test sentences also appear word for word in train. Their clip IDs
 are in `data/clean/test_in_train.csv`, so scores can also be computed without
 them.
 
+## Listed models we did not run
+
+Every model on the course list that supports Uzbek was run (A4-A9). These
+listed models were not, because they cannot transcribe Uzbek (checked on 18
+November 2026):
+
+- **HuBERT + CTC:** we found no HuBERT checkpoint fine-tuned for Uzbek ASR on
+  Hugging Face. The published HuBERT ASR checkpoints are English, for example
+  [`facebook/hubert-large-ls960-ft`](https://huggingface.co/facebook/hubert-large-ls960-ft)
+  (LibriSpeech); running it on Uzbek would be a wrong-language setting. The
+  multilingual [`utter-project/mHuBERT-147`](https://huggingface.co/utter-project/mHuBERT-147)
+  is only a pre-trained encoder with no ASR head, so it cannot produce a
+  transcript.
+- **[`nvidia/canary-1b-v2`](https://huggingface.co/nvidia/canary-1b-v2) and
+  [`nvidia/parakeet-tdt-0.6b-v3`](https://huggingface.co/nvidia/parakeet-tdt-0.6b-v3):**
+  25 European languages, no Uzbek ([paper](https://arxiv.org/abs/2509.14128)).
+- **[`Qwen/Qwen3-ASR-1.7B`](https://huggingface.co/Qwen/Qwen3-ASR-1.7B) and
+  [`Qwen/Qwen3-ASR-0.6B`](https://huggingface.co/Qwen/Qwen3-ASR-0.6B):** 30
+  languages, no Uzbek ([report](https://arxiv.org/abs/2601.21337)).
+
+Community Uzbek fine-tunes such as
+[`Gearnode/qwen3-asr-uzbek-v2`](https://huggingface.co/Gearnode/qwen3-asr-uzbek-v2)
+are not on the course list, and its model card says it was also trained on
+USC, so it may have seen our test set. We do not use it.
+
+## Dev, test and the freeze
+
+Every setting (learning rate, best checkpoint or epoch, decoding settings) was
+chosen on dev only. The settings of A1-A5, A8, A9, C1, C2, C2long and C4 were
+fixed and committed with their dev results by Friday 20 November (the freeze).
+Each of these systems was then run once on test, on 21 or 22 November; the
+scripts refuse the test split unless a flag (`--allow-test` or
+`--after-freeze`) is given. C2long and C4 were not in the first plan; they were
+added before the freeze because of dev results (see
+[nvidia_finetune/README.md](nvidia_finetune/README.md)). A6 and A7 were added
+on 22 November; they are ready models with greedy decoding and nothing to
+choose, and each was run once on dev and once on test.
+
 ## Repository layout
 
 | Path | Contents |
@@ -63,6 +101,7 @@ them.
 | `.gitignore` | Keeps Python caches, the virtual environment, model weights and logits out of git |
 | `requirements.txt` | Pinned Python packages for the data pipeline, `benchmark/` and the tests. Model folders that need other packages have their own pinned file |
 | `pytest.ini` | pytest configuration (repo root on the import path, tests in `tests/`) |
+| `REPORT.md` | Written report: data, systems, test results, RTF, confidence intervals and p-values, discussion |
 | `data/README.md` | USC source, licenses and citation |
 | `data/make_splits.py` | Selects the train speakers and writes `data/clean/train_speakers.txt` |
 | `data/get_raw.py` | Copies the clips of our splits from the extracted USC archive into `data/raw/usc/` |
@@ -82,6 +121,8 @@ them.
 | `baselines/gmm_hmm/` | A1: Kaldi MFCC + GMM-HMM, trained by us (CPU) |
 | `baselines/scratch/` | A2 / A3: Conformer CTC and Conformer RNN-T, trained by us from scratch |
 | `baselines/whisper_zero_shot/` | A4 / A5: Whisper small and large-v3, zero-shot; its `transcribe.py` also makes the C1 predictions |
+| `baselines/mms/` | A6: Meta MMS-1B (`facebook/mms-1b-all`) with its Uzbek Latin adapter, zero-shot |
+| `baselines/xlsr/` | A7: XLS-R 300M fine-tuned on Common Voice 8 Uzbek by others (`lucio/xls-r-uzbek-cv8`), zero-shot; not the same as `xlsr_ctc/` (C2) |
 | `baselines/nvidia_fastconformer/` | A8 / A9: NVIDIA Uzbek FastConformer, zero-shot (transducer and CTC heads), and the wrong-transcript scan for cleaning |
 | `whisper_finetune/` | C1: Whisper small fine-tuned on our train split |
 | `xlsr_ctc/` | C2 / C2long: XLS-R 300M + CTC fine-tuned on our train split |
@@ -116,3 +157,30 @@ python data/clean.py --allow-over-1pct  # rule 8 removes 1.6% of train; reviewed
 python data/stats.py
 pytest
 ```
+
+## Limitations
+
+- **One corpus, read speech only.** Every system is scored on the USC test
+  set alone. There is no second, outside test set, so the results may not hold
+  for spontaneous speech, other recording conditions or other domains.
+- **Small test set in speakers.** Test has 3,836 clips but only 38 speakers.
+  The 95% confidence intervals, which resample speakers
+  (`benchmark/results/confidence_intervals.csv`), are therefore wide: for
+  example 7.96% to 14.96% WER for A8.
+- **C4's gain is not significant.** C4a and C4b score lower than A8 and A9,
+  but the paired test does not show a significant difference (Holm-adjusted
+  p = 0.24 for WER, `benchmark/results/significance.csv`).
+- **C4's training data was filtered by its start model.** The wrong-transcript
+  rule removed the 448 train clips (1.6%) on which A9, the same NVIDIA model C4
+  starts from, has a CER above 0.5. Dev and test were not filtered this way.
+- **Sentences shared with train.** 152 dev and 66 test clips have a sentence
+  that also appears word for word in train (`data/clean/test_in_train.csv`);
+  the scores include them.
+- **Training data size.** Our train split is 25 h of selected audio (23.92 h
+  after cleaning), chosen for the GPU time we had (free Colab and Kaggle).
+- **RTF hardware.** A1 runs on CPU and the other systems on a GPU (test: Tesla
+  T4), so A1's RTF is not directly comparable with the others.
+- **Normalization and word-final ʻ.** `data/normalize.py` removes the ʻ of oʻ
+  and gʻ at the end of a word (`togʻ` and `tog` score as the same word). It
+  does so for references and outputs alike; 34 of the 27,042 test reference
+  words end this way.
