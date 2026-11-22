@@ -134,6 +134,17 @@ Error analysis on the best test system (`C4a_fastconformer-usc-ft-rnnt`, 11.38% 
 - **Test OOV rate (vs. train):** 21.53% token-based (5,823 / 27,042) and 45.15% type-based (4,773 / 10,572).
 - **Substitution breakdown (automatic common-prefix rule):** 43.2% suffix errors (1,065), 54.1% root/other substitutions (1,334), and 2.6% apostrophe errors (65).
 
+These categories are an automatic estimate, not a manual classification; the
+100 sample sentences in the report were not reviewed by hand. The rule only
+compares the first letters of the two words, so 25 "suffix errors" differ from
+the reference only by a doubled letter (`elchinning` → `elchining`, 7 times:
+the name *Elchin* vs *elchi* "ambassador"), and spelling variants such as
+`etarli` → `yetarli` count as root/other errors. The 43.2% suffix share is
+therefore an upper estimate. Some references are also wrong: in clip
+`1187023182_2_35103_1` the reference has *davlatda aylandi* where the model's
+*davlatga aylandi* ("became [the fifth] country") is the grammatical form, and
+it still counts as a model error.
+
 ## Listed models we did not run
 
 Every model on the course list that supports Uzbek was run (A4-A9). These

@@ -4,6 +4,7 @@ import argparse
 import csv
 import json
 import random
+import re
 from collections import Counter
 from pathlib import Path
 from typing import Dict, List, Tuple
@@ -149,6 +150,7 @@ def main() -> None:
     sub_counts = Counter()
     suffix_examples: Counter = Counter()
     apostrophe_examples: Counter = Counter()
+    double_letter_suffix = 0  # suffix errors that differ from the reference only by a doubled letter
     erroneous_clips = []
 
     for cid, raw_ref in test_refs.items():
@@ -169,6 +171,8 @@ def main() -> None:
                 clip_cats[cat] += 1
                 if cat == "suffix_error":
                     suffix_examples[(rw, hw)] += 1
+                    if re.sub(r"(.)\1+", r"\1", rw) == re.sub(r"(.)\1+", r"\1", hw):
+                        double_letter_suffix += 1
                 elif cat == "apostrophe_error":
                     apostrophe_examples[(rw, hw)] += 1
             elif op == "D":
@@ -214,6 +218,20 @@ def main() -> None:
         "Automatic rule: word pairs that become identical after removing the apostrophe (`'`) are classified as **apostrophe errors**, "
         "pairs with a common prefix of at least 3 characters and at least 50% of the shorter word are classified as **suffix errors**, "
         "and all others are classified as **root/other errors**.",
+        "",
+        "**These categories are an automatic estimate, not a manual classification.** The rule only compares the "
+        "first letters of the two words, so it mislabels some pairs, and the sample of erroneous sentences below "
+        "was not reviewed by hand:",
+        "",
+        f"- {double_letter_suffix} substitutions counted as suffix errors differ from the reference only by a "
+        "doubled letter, e.g. `elchinning` → `elchining` (7 times; *Elchin*, a name, vs *elchi* \"ambassador\") "
+        "and `hurkkan` → `hurkan`. Many of these are spelling slips or different stems rather than wrong suffixes, "
+        "so the suffix share is an upper estimate.",
+        "- Spelling variants with a dropped initial *y* (`etarli` → `yetarli`, `etkazadigan` → `yetkazadigan`) "
+        "are counted as root/other errors; the rule has no spelling category.",
+        "- Some references are themselves wrong, and the model output is counted as an error anyway. In clip "
+        "`1187023182_2_35103_1` the reference reads *beshinchi davlatda aylandi* and the model writes "
+        "*beshinchi davlatga aylandi*, the grammatical form (\"became the fifth country\").",
         "",
         "| Substitution Subtype | Count | Share of Substitutions |",
         "|---|---:|---:|",
