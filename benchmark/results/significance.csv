@@ -1,0 +1,9 @@
+system,baseline,split,metric,system_value,baseline_value,difference,ci_low,ci_high,p,p_holm
+C1_whisper-small-ft,A4_whisper-small,test,wer_norm,0.355262,1.198839,-0.843577,-0.944763,-0.802952,0.000200,0.000800
+C2long_xlsr-300m-ctc,C2_xlsr-300m-ctc,test,wer_norm,0.329598,0.354042,-0.024443,-0.027941,-0.018649,0.000200,0.000800
+C4a_fastconformer-usc-ft-rnnt,A8_nvidia-fastconformer-rnnt,test,wer_norm,0.113823,0.120664,-0.006841,-0.021013,0.002505,0.191781,0.237176
+C4b_fastconformer-usc-ft-ctc,A9_nvidia-fastconformer-ctc,test,wer_norm,0.122476,0.130834,-0.008357,-0.027040,0.001403,0.118588,0.237176
+C1_whisper-small-ft,A4_whisper-small,test,cer_norm,0.098929,0.531816,-0.432887,-0.544000,-0.375587,0.000200,0.000800
+C2long_xlsr-300m-ctc,C2_xlsr-300m-ctc,test,cer_norm,0.077840,0.084513,-0.006674,-0.007366,-0.005528,0.000200,0.000800
+C4a_fastconformer-usc-ft-rnnt,A8_nvidia-fastconformer-rnnt,test,cer_norm,0.034067,0.036533,-0.002466,-0.008451,0.000654,0.147985,0.159584
+C4b_fastconformer-usc-ft-ctc,A9_nvidia-fastconformer-ctc,test,cer_norm,0.033132,0.036124,-0.002992,-0.010841,0.000260,0.079792,0.159584

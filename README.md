@@ -90,6 +90,7 @@ them.
 | `notebooks/kaggle_enes_models.ipynb` | Kaggle notebook that ran A2, A3, A8, A9, C2, C2long, C4 and the wrong-transcript scan |
 | `benchmark/evaluate.py` | Scores every prediction file against `data/clean/{dev,test}.csv` and writes `benchmark/results/scores.csv` |
 | `benchmark/make_tables.py` | Writes the result tables from `scores.csv` |
+| `benchmark/significance.py` | 95% confidence intervals of every system's WER and CER and p-values for the paired comparisons (fine-tuned vs start model), by speaker-level bootstrap; writes `benchmark/results/confidence_intervals.csv` and `benchmark/results/significance.csv` |
 | `benchmark/timing.py` | Shared real-time factor (RTF) timer |
 | `benchmark/predictions/` | One file per system and split, `<system>__<split>.jsonl`, with the model output for every clip |
 | `benchmark/results/` | One run log per system, `<system>.json` (model ID and revision, settings, hardware, RTF), plus training logs |
