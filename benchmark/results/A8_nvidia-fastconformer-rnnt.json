@@ -30,6 +30,14 @@
       "rtf": 0.00457,
       "audio_hours": 3.947,
       "limit": null
+    },
+    "test": {
+      "clips": 3836,
+      "wer_quick": 0.1209,
+      "cer_quick": 0.0366,
+      "rtf": 0.00488,
+      "audio_hours": 4.402,
+      "limit": null
     }
   },
   "notes": {

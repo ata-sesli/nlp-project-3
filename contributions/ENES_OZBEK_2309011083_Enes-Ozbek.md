@@ -48,27 +48,31 @@ A2 and A3 share one encoder code (`baselines/scratch/`).
 | C4a / C4b | the A8/A9 NVIDIA model fine-tuned on our train split (both heads) | `nvidia_finetune/` | learning-rate search on dev (5e-5, 1e-4, 2e-4, 4e-4), then 27 epochs with 4e-4 (6.6 h), best epoch kept; model on Hugging Face [`Waxech/stt-uz-fastconformer-usc`](https://huggingface.co/Waxech/stt-uz-fastconformer-usc) |
 
 Why C4 (added after the plan): after the first run, our planned model C2 got 34.05% dev WER, while the ready NVIDIA
-model (A8) already got 14.26% without any training on our data. XLS-R was pre-trained without transcripts, so 24 hours
+model (A8) already got 14.25% without any training on our data. XLS-R was pre-trained without transcripts, so 24 hours
 were not enough for it; the NVIDIA model already knew Uzbek but had never seen USC. So I fine-tuned the NVIDIA model on
 our USC train split. On the way I fixed two problems: fp16 made the model output only `<unk>` on the T4 (so training
 uses fp32), and I added a GPU memory test on the longest clips and a learning-rate search on dev. Details:
 `nvidia_finetune/README.md`.
 
-## 4. Dev results (all 3,783 dev clips, normalized text, greedy decoding)
+## 4. Results (official scores from `benchmark/evaluate.py`)
 
-| Type | Row | Model | WER | CER |
-|---|---|---|---:|---:|
-| Baseline | A8 | NVIDIA FastConformer, ready, transducer head | 14.26% | 5.01% |
-| Baseline | A9 | NVIDIA FastConformer, ready, CTC head | 15.97% | 5.22% |
-| Baseline | A3 | Conformer RNN-T from scratch | 40.5% | 15.8% |
-| Baseline | A2 | Conformer CTC from scratch | 47.3% | 13.4% |
-| Ours | C4a | NVIDIA FastConformer fine-tuned, transducer head | **11.60%** | 3.93% |
-| Ours | C4b | NVIDIA FastConformer fine-tuned, CTC head | 12.46% | **3.78%** |
-| Ours | C2long | XLS-R 300M, trained longer | 32.58% | 8.05% |
-| Ours | C2 | XLS-R 300M fine-tuned | 34.05% | 8.46% |
+All 3,783 dev clips and all 3,836 test clips, normalized text, greedy decoding, no language model. Learning rates and
+best epochs were chosen on dev only; the test set was run once, after the freeze (notebook step `test`).
 
-Fine-tuning the NVIDIA model on our data lowers dev WER from 14.26% to 11.60% (transducer head) and from 15.97% to
-12.46% (CTC head).
+| Type | Row | Model | Dev WER | Dev CER | Test WER | Test CER |
+|---|---|---|---:|---:|---:|---:|
+| Baseline | A8 | NVIDIA FastConformer, ready, transducer head | 14.25% | 5.01% | 12.07% | 3.65% |
+| Baseline | A9 | NVIDIA FastConformer, ready, CTC head | 15.95% | 5.21% | 13.08% | 3.61% |
+| Baseline | A3 | Conformer RNN-T from scratch | 40.46% | 15.77% | 42.19% | 16.24% |
+| Baseline | A2 | Conformer CTC from scratch | 47.25% | 13.41% | 50.17% | 13.97% |
+| Ours | C4a | NVIDIA FastConformer fine-tuned, transducer head | **11.60%** | 3.93% | **11.38%** | 3.41% |
+| Ours | C4b | NVIDIA FastConformer fine-tuned, CTC head | 12.46% | **3.78%** | 12.25% | **3.31%** |
+| Ours | C2long | XLS-R 300M, trained longer | 32.57% | 8.05% | 32.96% | 7.78% |
+| Ours | C2 | XLS-R 300M fine-tuned | 34.05% | 8.46% | 35.40% | 8.45% |
+
+Fine-tuning the NVIDIA model on our data lowers test WER from 12.07% to 11.38% (transducer head) and from 13.08% to
+12.25% (CTC head). The gain is smaller on test than on dev (14.25% to 11.60%), because the learning rate and the best
+epoch were picked on dev, so the dev numbers are a little optimistic. The test numbers are the fair ones.
 
 ## 5. Shared code
 

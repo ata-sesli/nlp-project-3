@@ -1209,6 +1209,15 @@
       "audio_hours": 3.947,
       "gpu": "Tesla T4",
       "limit": null
+    },
+    "test": {
+      "clips": 3836,
+      "wer_quick": 0.4219,
+      "cer_quick": 0.1625,
+      "rtf": 0.00147,
+      "audio_hours": 4.402,
+      "gpu": "Tesla T4",
+      "limit": null
     }
   },
   "notes": {

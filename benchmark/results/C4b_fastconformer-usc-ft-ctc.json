@@ -63,7 +63,7 @@
   "system": "C4b_fastconformer-usc-ft-ctc",
   "model": "NVIDIA Uzbek FastConformer hybrid, fine-tuned by us on USC train (nvidia_finetune/)",
   "prediction_model": {
-    "source": "/kaggle/working/c4_run/best.nemo",
+    "source": "/kaggle/input/notebooks/eneszbek/notebookc6cd24594b/c4_run/best.nemo",
     "revision": null
   },
   "decoder": "CTC greedy",
@@ -92,6 +92,14 @@
       "rtf": 0.00264,
       "audio_hours": 3.947,
       "limit": null
+    },
+    "test": {
+      "clips": 3836,
+      "wer_quick": 0.1227,
+      "cer_quick": 0.0332,
+      "rtf": 0.00321,
+      "audio_hours": 4.402,
+      "limit": null
     }
   },
   "notes": {
@@ -99,7 +107,7 @@
   },
   "huggingface": {
     "repo": "Waxech/stt-uz-fastconformer-usc",
-    "revision": "c9f61252101cb09f65fd0f21eabede5e63b4b48f",
+    "revision": "9ebd17ebc51fdcf64215c60321d040aae28047d1",
     "file": "stt_uz_fastconformer_usc_ft.nemo"
   }
 }
