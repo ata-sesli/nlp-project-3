@@ -1,4 +1,4 @@
-\# Uzbek Speech Recognition: Experimental Report
+﻿\# Uzbek Speech Recognition: Experimental Report
 
 
 
@@ -67,6 +67,8 @@ The evaluated systems are divided into two main groups.
 \- A4: Whisper-small, zero-shot.
 
 \- A5: Whisper-large-v3, zero-shot.
+- A6: Meta MMS-1B with the Uzbek Latin language adapter, zero-shot on USC.
+- A7: XLS-R Uzbek Common Voice 8, zero-shot on USC.
 
 \- A8: NVIDIA Uzbek FastConformer, zero-shot RNNT.
 
@@ -147,6 +149,8 @@ For statistical uncertainty, speaker-level bootstrap confidence intervals are ca
 | A4 Whisper-small | 119.8839% | 53.1816% |
 
 | A5 Whisper-large-v3 | 93.6580% | 32.6871% |
+| A6 MMS-1B Uzbek | 29.3802% | 6.6048% |
+| A7 XLS-R Uzbek CV8 | 40.7144% | 8.7757% |
 
 | A8 NVIDIA FastConformer RNNT | 12.0664% | 3.6533% |
 
@@ -158,7 +162,7 @@ Among the evaluated baseline systems, NVIDIA FastConformer RNNT achieves the low
 
 
 
-The Whisper zero-shot systems perform substantially worse on this test set than the Uzbek-oriented FastConformer models.
+The Whisper zero-shot systems perform substantially worse on this test set than the Uzbek-oriented FastConformer models. Among the newly evaluated systems, MMS-1B achieves lower WER and CER than XLS-R Uzbek CV8, while XLS-R provides faster inference.
 
 
 
@@ -212,7 +216,8 @@ The recorded inference results show that the neural systems can process the test
 
 | A5 Whisper-large-v3 | 0.08499 |
 
-| A6 / A7 | Not included in the current repository benchmark results |
+| A6 MMS-1B Uzbek | 0.01178 |
+| A7 XLS-R Uzbek CV8 | 0.00546 |
 
 | A8 NVIDIA FastConformer RNNT | 0.00488 |
 
@@ -300,6 +305,8 @@ The NVIDIA FastConformer systems substantially outperform the other evaluated ze
 
 
 
+The newly evaluated MMS-1B baseline achieves 29.38% WER and 6.60% CER, outperforming the XLS-R Uzbek CV8 baseline (40.71% WER and 8.78% CER). XLS-R is faster, with an RTF of 0.00546 compared with MMS-1B's 0.01178. Both systems are substantially less accurate than the NVIDIA FastConformer baselines.
+
 The distinction between WER and CER is important. C4a obtains the lowest WER, whereas C4b obtains the lowest CER. This indicates that the preferred model depends on whether word-level or character-level transcription errors are prioritized.
 
 
@@ -357,6 +364,7 @@ The results support the effectiveness of Uzbek-oriented pretrained acoustic mode
 
 
 Future work could investigate larger training datasets, alternative decoding strategies, language-model integration, and more extensive evaluation across additional Uzbek speech domains.
+
 
 
 

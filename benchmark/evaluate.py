@@ -3,7 +3,11 @@
 import argparse
 import csv
 import json
+import sys
 from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT)
 from typing import Dict, List, Tuple
 
 import jiwer
@@ -100,9 +104,12 @@ def evaluate_file(pred_path: Path, clean_dir: Path, results_dir: Path) -> Dict[s
     rtf, hardware, params = "", "", ""
     if meta_path.exists():
         meta = json.loads(meta_path.read_text(encoding="utf-8"))
-        rtf = meta.get("rtf", "")
-        hardware = meta.get("hardware", "")
-        params = meta.get("params", "")
+        run_meta = meta.get("runs", {}).get(split, {})
+        run_env = run_meta.get("environment", {})
+
+        rtf = run_meta.get("rtf", meta.get("rtf", ""))
+        hardware = run_env.get("hardware", meta.get("hardware", ""))
+        params = meta.get("parameters", meta.get("params", ""))
 
     return {
         "system": system,
