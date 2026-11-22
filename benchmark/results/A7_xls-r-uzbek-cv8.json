@@ -1,0 +1,44 @@
+{
+  "system": "A7_xls-r-uzbek-cv8",
+  "model_id": "lucio/xls-r-uzbek-cv8",
+  "revision": "715a374c1b779d10e094f723c7564785042d866d",
+  "parameters": 315472545,
+  "decoding": {
+    "method": "greedy CTC",
+    "language": "Uzbek Latin",
+    "lm": null,
+    "dtype": "float16"
+  },
+  "seed": 42,
+  "hardware": "Tesla T4",
+  "runs": {
+    "dev": {
+      "clips": 3783,
+      "audio_hours": 3.947,
+      "rtf": 0.005774040475506163,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "predictions": "benchmark/predictions/A7_xls-r-uzbek-cv8__dev.jsonl",
+      "environment": {
+        "hardware": "Tesla T4",
+        "python": "3.13.16",
+        "torch": "2.11.0+cu130",
+        "transformers": "5.20.2"
+      }
+    },
+    "test": {
+      "clips": 3836,
+      "audio_hours": 4.402,
+      "rtf": 0.005464148010597586,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "predictions": "benchmark/predictions/A7_xls-r-uzbek-cv8__test.jsonl",
+      "environment": {
+        "hardware": "Tesla T4",
+        "python": "3.13.16",
+        "torch": "2.11.0+cu130",
+        "transformers": "5.20.2"
+      }
+    }
+  }
+}

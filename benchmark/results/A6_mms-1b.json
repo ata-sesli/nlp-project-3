@@ -1,0 +1,44 @@
+{
+  "system": "A6_mms-1b",
+  "model_id": "facebook/mms-1b-all",
+  "revision": "3d33597edbdaaba14a8e858e2c8caa76e3cec0cd",
+  "parameters": 964793329,
+  "decoding": {
+    "method": "greedy CTC",
+    "language": "uzb-script_latin",
+    "lm": null,
+    "dtype": "float16"
+  },
+  "seed": 42,
+  "hardware": "Tesla T4",
+  "runs": {
+    "dev": {
+      "clips": 3783,
+      "audio_hours": 3.947,
+      "rtf": 0.012016566125542135,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "predictions": "benchmark/predictions/A6_mms-1b__dev.jsonl",
+      "environment": {
+        "hardware": "Tesla T4",
+        "python": "3.13.16",
+        "torch": "2.11.0+cu130",
+        "transformers": "5.20.2"
+      }
+    },
+    "test": {
+      "clips": 3836,
+      "audio_hours": 4.402,
+      "rtf": 0.011777604999910946,
+      "data_source": "data/clean CSV",
+      "limit": null,
+      "predictions": "benchmark/predictions/A6_mms-1b__test.jsonl",
+      "environment": {
+        "hardware": "Tesla T4",
+        "python": "3.13.16",
+        "torch": "2.11.0+cu130",
+        "transformers": "5.20.2"
+      }
+    }
+  }
+}
