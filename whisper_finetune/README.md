@@ -19,7 +19,9 @@ the same inference code as the zero-shot baselines.
 
 Model weights are not in git. The model is on Hugging Face:
 [`akifkulll/whisper-small-uzbek-usc25h`](https://huggingface.co/akifkulll/whisper-small-uzbek-usc25h),
-revision `b38781ed83b508cbd44ce5fdcefa488efe849d29`.
+revision `b38781ed83b508cbd44ce5fdcefa488efe849d29`. This revision made all dev and test predictions. The
+later revision `fdd98ccc585456041474fc6cb20c8daca48e34e8` only updates the model card (test results); the
+weights file is the same.
 
 ## Dev results (all 3,783 dev clips, normalized text, greedy decoding)
 
@@ -40,3 +42,16 @@ The best checkpoint (step 3000) is the uploaded model. Downloaded from Hugging F
 
 These are quick scores with the normalizer copy in `whisper_common.py`; the official numbers come from
 `benchmark/evaluate.py`.
+
+## Test results (all 3,836 test clips, one run after the freeze, Colab T4)
+
+| Row | Model | Dev WER | Test WER | Test CER | Test RTF (T4) |
+|---|---|---:|---:|---:|---:|
+| A4 | `openai/whisper-small`, zero-shot | 136.47% | 119.87% | 53.19% | 0.0379 |
+| A5 | `openai/whisper-large-v3`, zero-shot | 96.31% | 93.67% | 32.70% | 0.0850 |
+| **C1** | `openai/whisper-small` fine-tuned | **33.83%** | **35.56%** | **9.91%** | **0.0201** |
+
+C1's test WER is only 1.7 points above dev and its CER is the same (9.99% -> 9.91%), so the step-3000 choice
+on dev did not overfit dev. Test clips are longer on average (4.1 s vs 3.8 s), and C1's WER hardly changes with
+clip length. C1 is also the fastest of the three on the same T4: about 2x faster than zero-shot small, which
+loops on some clips.

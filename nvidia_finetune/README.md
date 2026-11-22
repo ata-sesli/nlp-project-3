@@ -13,7 +13,7 @@ The model has one encoder and two decoders, so C4 gives two rows:
 
 The plan had three contributions: C1 (Whisper-small fine-tuned), C2 (XLS-R 300M + CTC) and C3 (C2 + a word language
 model). After the first training run, C2 reached 34.05% dev WER, while the ready NVIDIA model (A8), with no training on
-our data, already reached 14.26%. So our planned fine-tune was far worse than a ready baseline.
+our data, already reached 14.25%. So our planned fine-tune was far worse than a ready baseline.
 
 The reason: XLS-R was pre-trained on speech without any transcripts, so with our 24 hours it had to learn Uzbek
 speech recognition almost from the start. The NVIDIA model was already trained for Uzbek (Common Voice, UzbekVoice and
@@ -44,16 +44,21 @@ Problems we hit while setting up C4, and what we did:
 | Checkpoint choice | dev WER (transducer head) on a fixed sample of 1,000 dev clips (seed 42) after every epoch; the best epoch is kept. The start model is scored on the same clips before training, so the gain is visible in the log. If that start score is above 50% WER (A8 gets about 14%), training stops before it begins, because something is broken |
 | Length | as many epochs as fit in the Kaggle time (from the speed measured in the learning-rate search), at most 30; `--max-hours` stops it in any case |
 
-## Dev results (step `improve` on Kaggle, 2x T4)
+## Results
 
-All 3,783 dev clips, normalized text, greedy decoding. A8/A9 are the same model before our training.
+Official scores from `benchmark/evaluate.py`: all 3,783 dev and 3,836 test clips, normalized text, greedy decoding.
+A8/A9 are the same model before our training. Training and the choices below used dev only; test was run once after
+the freeze (notebook step `test`).
 
-| Row | Model | WER | CER |
-|---|---|---|---|
-| A8 | start model, transducer head | 14.26% | 5.01% |
-| **C4a** | fine-tuned, transducer head | **11.60%** | 3.93% |
-| A9 | start model, CTC head | 15.97% | 5.22% |
-| **C4b** | fine-tuned, CTC head | 12.46% | **3.78%** |
+| Row | Model | Dev WER | Dev CER | Test WER | Test CER |
+|---|---|---:|---:|---:|---:|
+| A8 | start model, transducer head | 14.25% | 5.01% | 12.07% | 3.65% |
+| **C4a** | fine-tuned, transducer head | **11.60%** | 3.93% | **11.38%** | 3.41% |
+| A9 | start model, CTC head | 15.95% | 5.21% | 13.08% | 3.61% |
+| **C4b** | fine-tuned, CTC head | 12.46% | **3.78%** | 12.25% | **3.31%** |
+
+The gain is smaller on test (about 0.7 to 0.8 points) than on dev (about 2.6 to 3.5 points), because the learning rate
+and the best epoch were picked on dev.
 
 Learning-rate search (1 epoch each, WER of the transducer head on the 1,000-clip dev check):
 
@@ -64,7 +69,7 @@ Learning-rate search (1 epoch each, WER of the transducer head on the 1,000-clip
 - 4e-4 was the best value and was used for the full run: 27 epochs (6.6 h, about 1 s per step, batch 16 x 2, 11.4 GB of GPU memory). The best epoch was 21 (dev-check WER 11.04%).
 - 4e-4 is the largest value we tried, so a larger one might be slightly better; there was no Kaggle time left to test it.
 - Most of the gain comes in the first epoch (12.2% after epoch 1); the remaining epochs add about 1 point.
-- `start_model_dev_check_wer` in the run log (43%) is NeMo's own WER on raw text during training. The start model writes capital letters and punctuation and our dev text has neither, so that number is not comparable. On normalized text the start model is A8 (14.26%).
+- `start_model_dev_check_wer` in the run log (43%) is NeMo's own WER on raw text during training. The start model writes capital letters and punctuation and our dev text has neither, so that number is not comparable. On normalized text the start model is A8 (14.25% on dev).
 
 ## Files
 

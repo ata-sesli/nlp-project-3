@@ -13,11 +13,14 @@ Apache-2.0 license: the Hugging Face card gives MIT and ISSAI's USC page gives
 CC BY 4.0. See [data/README.md](data/README.md) for both licenses and the
 citation.
 
-| Split | Source | Size |
-|-------|--------|------|
-| train | Official USC train speakers that are not in dev or test and have at most 0.25 h of audio, shuffled with seed 42; whole speakers added, skipping any that would push the total past 25.0 h | 25.0 h |
-| dev   | Official USC dev, all clips | 4.0 h |
-| test  | Official USC test, all clips | 4.5 h |
+| Split | Source | Selected | After cleaning (kept audio) |
+|-------|--------|----------|-----------------------------|
+| train | Official USC train speakers that are not in dev or test and have at most 0.25 h of audio, shuffled with seed 42; whole speakers added, skipping any that would push the total past 25.0 h | 25.0 h | 23.92 h |
+| dev   | Official USC dev, all clips | 4.0 h | 3.95 h |
+| test  | Official USC test, all clips | 4.5 h | 4.40 h |
+
+The "after cleaning" numbers, with speakers and clips per split, come from
+`data/stats.py` and are in [data/clean/stats.md](data/clean/stats.md).
 
 USC has no speaker metadata file. Speaker IDs come from clip file names; see
 `data/make_splits.py` for the rule. With it, dev and test have exactly the 41
@@ -39,23 +42,63 @@ which. `data/clean.py` removes all such copies from train; copies with the same
 transcript keep the first clip ID. In dev and test, audio shared under
 different transcripts is only flagged, never removed.
 
+The other cleaning rules (broken audio, clips over 30 s, Cyrillic look-alike
+letters, apostrophe forms, long silence, letters outside the Uzbek Latin
+alphabet, text that does not fit the audio length, wrong transcripts and noise
+or clipping) are described in `data/clean.py` and `data/rules.py`. Only
+clearly broken files are removed from dev and test; everything else there is
+flagged, or fixed in the case of apostrophes, look-alike letters and silence
+trimming. Every removed, fixed or flagged clip is listed in
+`data/clean/removed.csv`, and the counts per rule are in `data/clean/stats.md`.
+
+Some dev and test sentences also appear word for word in train. Their clip IDs
+are in `data/clean/test_in_train.csv`, so scores can also be computed without
+them.
+
 ## Repository layout
 
 | Path | Contents |
 |------|----------|
 | `LICENSE` | Apache-2.0, covers the code only |
 | `.gitignore` | Keeps Python caches, the virtual environment, model weights and logits out of git |
-| `requirements.txt` | Pinned Python packages for the shared code and tests |
+| `requirements.txt` | Pinned Python packages for the data pipeline, `benchmark/` and the tests. Model folders that need other packages have their own pinned file |
 | `pytest.ini` | pytest configuration (repo root on the import path, tests in `tests/`) |
 | `data/README.md` | USC source, licenses and citation |
 | `data/make_splits.py` | Selects the train speakers and writes `data/clean/train_speakers.txt` |
-| `data/clean/train_speakers.txt` | Speaker IDs of our train split, one per line |
 | `data/get_raw.py` | Copies the clips of our splits from the extracted USC archive into `data/raw/usc/` |
 | `data/raw/usc/<split>/<speaker_id>/` | Our clips as lossless 16 kHz mono FLAC (`<clip_id>.flac`) with the unchanged USC transcript (`<clip_id>.txt`) |
-| `data/clean.py` | Applies the cleaning rules to `data/raw/` and writes the split CSVs and `removed.csv` |
+| `data/clean.py` | Applies the cleaning rules to `data/raw/` and writes the split CSVs, `removed.csv` and `cleaning_limits.json` |
+| `data/rules.py` | The per-clip cleaning rules used by `data/clean.py`, with the limits they compute from the train data |
+| `data/stats.py` | Writes `data/clean/stats.md` and `data/clean/test_in_train.csv` from the clean CSVs and the cleaning log |
+| `data/normalize.py` | Text normalization used for scoring (and its translit + numbers variant), shared by every system |
+| `data/clean/train_speakers.txt` | Speaker IDs of our train split, one per line |
 | `data/clean/{train,dev,test}.csv` | Clean splits: `id, path, transcript, speaker_id, duration_s, start_s, end_s`; `path` points into `data/raw/` |
 | `data/clean/removed.csv` | Every clip the cleaning removed, fixed or flagged: `id, split, action, reason, detail` |
-| `tests/` | pytest tests for the data pipeline |
+| `data/clean/cleaning_limits.json` | Limits the rules used (letters per second, SNR, clipping, silence) and the by-ear check results |
+| `data/clean/rule8_cer.csv` | CER of the NVIDIA model (A9) on every train clip, input of the wrong-transcript rule |
+| `data/clean/manual_check.csv` | Clips sampled for the by-ear checks of the wrong-transcript and noise rules, with the answers |
+| `data/clean/stats.md` | Speakers, clips and hours per split, rule counts, limits and by-ear check results |
+| `data/clean/test_in_train.csv` | Dev and test clips whose normalized sentence also appears in train |
+| `baselines/gmm_hmm/` | A1: Kaldi MFCC + GMM-HMM, trained by us (CPU) |
+| `baselines/scratch/` | A2 / A3: Conformer CTC and Conformer RNN-T, trained by us from scratch |
+| `baselines/whisper_zero_shot/` | A4 / A5: Whisper small and large-v3, zero-shot; its `transcribe.py` also makes the C1 predictions |
+| `baselines/nvidia_fastconformer/` | A8 / A9: NVIDIA Uzbek FastConformer, zero-shot (transducer and CTC heads), and the wrong-transcript scan for cleaning |
+| `whisper_finetune/` | C1: Whisper small fine-tuned on our train split |
+| `xlsr_ctc/` | C2 / C2long: XLS-R 300M + CTC fine-tuned on our train split |
+| `nvidia_finetune/` | C4a / C4b: the NVIDIA FastConformer fine-tuned on our train split (added after C2 stayed far behind A8; the folder README explains why) |
+| `common/` | Helpers shared by `baselines/scratch/`, `baselines/nvidia_fastconformer/` and `xlsr_ctc/`: data loading, run logs, a fake dataset for smoke tests, version pinning |
+| `notebooks/kaggle_enes_models.ipynb` | Kaggle notebook that ran A2, A3, A8, A9, C2, C2long, C4 and the wrong-transcript scan |
+| `benchmark/evaluate.py` | Scores every prediction file against `data/clean/{dev,test}.csv` and writes `benchmark/results/scores.csv` |
+| `benchmark/make_tables.py` | Writes the result tables from `scores.csv` |
+| `benchmark/significance.py` | 95% confidence intervals of every system's WER and CER and p-values for the paired comparisons (fine-tuned vs start model), by speaker-level bootstrap; writes `benchmark/results/confidence_intervals.csv` and `benchmark/results/significance.csv` |
+| `benchmark/timing.py` | Shared real-time factor (RTF) timer |
+| `benchmark/predictions/` | One file per system and split, `<system>__<split>.jsonl`, with the model output for every clip |
+| `benchmark/results/` | One run log per system, `<system>.json` (model ID and revision, settings, hardware, RTF), plus training logs |
+| `contributions/` | One file per team member: what they did, in which files, with which results |
+| `tests/` | pytest tests for the data pipeline, cleaning rules, normalizer, evaluator and model code |
+
+Each folder under `baselines/` and each contribution folder has its own README
+with settings, commands and, where needed, its own pinned requirements file.
 
 ## Reproducing
 
@@ -69,6 +112,7 @@ shasum -a 256 ISSAI_USC.tar.gz  # 44dc6c70cde073548d975dcdcd3c44ca228ca24ea17990
 tar -xzf ISSAI_USC.tar.gz
 python data/make_splits.py --usc-dir ISSAI_USC
 python data/get_raw.py --usc-dir ISSAI_USC
-python data/clean.py
+python data/clean.py --allow-over-1pct  # rule 8 removes 1.6% of train; reviewed by ear (data/clean/stats.md)
+python data/stats.py
 pytest
 ```

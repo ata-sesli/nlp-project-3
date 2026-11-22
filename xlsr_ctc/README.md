@@ -33,9 +33,16 @@ XLSR_SYSTEM=C2long_xlsr-300m-ctc python xlsr_ctc/train.py --out-dir runs/xlsr_lo
 XLSR_SYSTEM=C2long_xlsr-300m-ctc python xlsr_ctc/predict.py --model runs/xlsr_long/best --split dev
 ```
 
-Dev results (all 3,783 dev clips, normalized text, greedy decoding): C2 34.05% WER / 8.46% CER, C2long 32.58% WER /
-8.05% CER (all 20 epochs done in 6.6 h on one T4, best checkpoint at step 16,000 of 16,199). The extra training helps a
-little, but C2long stays far behind the NVIDIA model (A8 14.26%, C4a 11.60%).
+Results (official scores from `benchmark/evaluate.py`, all clips, normalized text, greedy decoding, no language model):
+
+| Row | Dev WER | Dev CER | Test WER | Test CER |
+|---|---:|---:|---:|---:|
+| C2 | 34.05% | 8.46% | 35.40% | 8.45% |
+| C2long | 32.57% | 8.05% | 32.96% | 7.78% |
+
+C2long ran all 20 epochs in 6.6 h on one T4 (best checkpoint at step 16,000 of 16,199). The extra training helps a little,
+but C2long stays far behind the NVIDIA model (test WER: A8 12.07%, C4a 11.38%). The C2 test run used the Hugging Face
+copy of the train_night checkpoint (revision `839362d`), which has the same weights.
 
 ## Run (from the repo root)
 

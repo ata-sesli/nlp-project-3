@@ -37,3 +37,28 @@ saved in `exp/tri3b/decode_dev/best_params.json` and reused for test.
 
 Quick scores with the normalizer copy in `baselines/whisper_zero_shot/whisper_common.py`; the official numbers
 come from `benchmark/evaluate.py`.
+
+## Test results (all 3,836 test clips, one run after the freeze)
+
+Run with `--eval-only true --splits test --after-freeze true` on the models restored from Drive, with the dev
+choice (LM weight 16, penalty 1.5). Nothing was tuned on test.
+
+| Row | Dev WER | Test WER | Test CER | Test RTF (Colab CPU, 8 jobs) |
+|---|---:|---:|---:|---:|
+| A1 | 53.61% | 60.12% | 28.77% | 0.217 |
+
+A1 loses 6.5 WER points from dev to test, while the Whisper fine-tune (C1) loses only 1.7. What we checked:
+
+- **Not the vocabulary.** 21.6% of the words in both dev and test never occur in train (out-of-vocabulary for
+  our word LM), so test has no more unknown words than dev.
+- **Partly clip length.** Test clips are longer (29% are 5-10 s vs 19% in dev), and A1's WER rises with clip
+  length (dev: 51.3% under 5 s, 57.8% for 5-10 s), while C1's does not.
+- **The rest is the test set itself.** Within the same length range A1 is still about 6 points worse on test
+  (under 5 s: 51.3% -> 57.5%). The GMM-HMM, trained on 24 hours only, is more sensitive to new speakers and
+  recordings than Whisper, which was pre-trained on far more audio.
+
+RTF (0.217 vs 0.178 on dev) was measured on the same CPU type with the same 8 jobs; Colab CPUs are shared, so
+some of this difference may be machine load. We did not measure it further.
+
+`score.py` notes: an eval-only run has no `data/local/lm_source.txt` (written by stage 2), so `score.py` falls
+back to the default LM description, and on test it logs the grid that was searched on dev.

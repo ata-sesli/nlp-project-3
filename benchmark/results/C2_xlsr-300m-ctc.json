@@ -67,8 +67,8 @@
   },
   "decoder": "CTC greedy (no LM)",
   "prediction_model": {
-    "source": "/kaggle/working/xlsr_run/best",
-    "revision": null,
+    "source": "Waxech/xls-r-300m-uzbek-usc",
+    "revision": "839362d772f4321605d2812f1ac1c75e89cb04d4",
     "chosen": {
       "step": 12735,
       "dev_wer": 0.3404690907472518,
@@ -82,6 +82,15 @@
       "cer_quick": 0.0846,
       "rtf": 0.00336,
       "audio_hours": 3.947,
+      "gpu": "Tesla T4",
+      "limit": null
+    },
+    "test": {
+      "clips": 3836,
+      "wer_quick": 0.3542,
+      "cer_quick": 0.0846,
+      "rtf": 0.00384,
+      "audio_hours": 4.402,
       "gpu": "Tesla T4",
       "limit": null
     }

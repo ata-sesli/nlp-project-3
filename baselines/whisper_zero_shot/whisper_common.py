@@ -118,12 +118,18 @@ def write_predictions(system: str, split: str, ids: list[str], hyps: list[str]) 
 
 
 def write_run_log(system: str, split: str, info: dict) -> Path:
-    """benchmark/results/<system>.json; one file per system, one block per split."""
+    """benchmark/results/<system>.json; one file per system, one block per split.
+
+    Each split's block keeps its own hardware and versions under "environment", because
+    splits can run on different machines (dev on an A100, test on a T4); the top-level
+    copies describe the latest run."""
     RESULTS_DIR.mkdir(parents=True, exist_ok=True)
     out = RESULTS_DIR / f"{system}.json"
     log = json.loads(out.read_text(encoding="utf-8")) if out.exists() else {}
     runs = log.pop("runs", {})
     runs[split] = info.pop("run")
+    runs[split]["environment"] = {k: info[k] for k in ("hardware", "python", "torch", "transformers")
+                                  if k in info}
     log.update(info)
     log["runs"] = runs
     out.write_text(json.dumps(log, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

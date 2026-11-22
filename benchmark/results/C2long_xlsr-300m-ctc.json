@@ -68,7 +68,7 @@
   },
   "decoder": "CTC greedy (no LM)",
   "prediction_model": {
-    "source": "/kaggle/working/xlsr_long/best",
+    "source": "/kaggle/input/notebooks/eneszbek/notebookc6cd24594b/xlsr_long/best",
     "revision": null,
     "chosen": {
       "step": 16000,
@@ -83,6 +83,15 @@
       "cer_quick": 0.0805,
       "rtf": 0.00344,
       "audio_hours": 3.947,
+      "gpu": "Tesla T4",
+      "limit": null
+    },
+    "test": {
+      "clips": 3836,
+      "wer_quick": 0.3297,
+      "cer_quick": 0.0779,
+      "rtf": 0.00402,
+      "audio_hours": 4.402,
       "gpu": "Tesla T4",
       "limit": null
     }

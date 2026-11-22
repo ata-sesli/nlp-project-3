@@ -17,7 +17,7 @@ I built four of the twelve systems in our benchmark, from code to trained model 
 
 Every script, notebook and README in these three folders is mine, together with the A1, A4, A5 and C1 files in
 `benchmark/predictions/` and `benchmark/results/`. Whisper ran on a Colab A100 40 GB and Kaldi on a Colab CPU
-runtime (8 cores). The data cleaning (`data/`) is Ata's and Enes's work; I checked their clean splits before training.
+runtime (8 cores); the single test run used a Colab T4 for Whisper. The data cleaning (`data/`) is Ata's and Enes's work; I checked their clean splits before training.
 
 ## 1. Whisper zero-shot baselines (A4, A5)
 
@@ -115,9 +115,43 @@ What the numbers show:
 - **WER and CER tell different stories.** C1's CER is 10% but its WER is 34%: one wrong suffix makes the whole word
   wrong, which is why we report both.
 
-Test results are added after the freeze (one run on Saturday 21 November).
+## 5. Test results (all 3,836 test clips, one run after the freeze, 21 November)
 
-## 5. Problems I solved
+I ran test once for each system, with the settings chosen on dev and nothing changed. Whisper ran on a Colab T4
+(so its RTF is comparable with the team's other GPU systems), and Kaldi on the same Colab CPU type as dev, using
+the trained models saved to Drive.
+
+| Type | Row | Model | Dev WER | Test WER | Test CER | Test RTF |
+|---|---|---|---:|---:|---:|---:|
+| Baseline | A4 | Whisper-small, zero-shot | 136.47% | 119.87% | 53.19% | 0.0379 (T4) |
+| Baseline | A5 | Whisper-large-v3, zero-shot | 96.31% | 93.67% | 32.70% | 0.0850 (T4) |
+| Baseline | A1 | Kaldi GMM-HMM (tri3b) | 53.61% | 60.12% | 28.77% | 0.217 (CPU, 8 jobs) |
+| Ours | C1 | Whisper-small fine-tuned | **33.83%** | **35.56%** | **9.91%** | **0.0201 (T4)** |
+
+The ranking is the same as on dev. I also checked why the systems moved between dev and test, with small
+scripts over the prediction files:
+
+- **C1 generalizes:** +1.7 WER points and the same CER, and its WER hardly depends on clip length.
+- **A1 drops 6.5 points, and it is not the vocabulary.** 21.6% of dev and of test words are unseen in train, so
+  OOV words do not explain it. Test clips are longer (29% are 5-10 s vs 19% on dev) and A1 gets worse on longer
+  clips, but it is also about 6 points worse within the same length range. The classic model trained on 24 hours
+  is more sensitive to new speakers and recordings than a model pre-trained on far more audio.
+- **A4 improves only because it loops less.** 40 test clips (1.0%) vs 78 dev clips (2.1%) fall into the
+  repetition loop; without them its WER is the same on both splits (110.0% vs 109.4%).
+
+Two small fixes came out of the test run (details in `baselines/gmm_hmm/README.md`):
+
+- `score.py` crashed in the eval-only run because `data/local/lm_source.txt` is written by the LM stage, which
+  eval-only skips. It now falls back to the default LM description. It also logged that run's default grid
+  instead of the grid searched on dev; it now reads the grid from `best_params.json`.
+- The run logs kept only the hardware of the latest run, so after the T4 test run the dev RTFs looked like T4
+  numbers. `whisper_common.write_run_log` now stores the hardware and versions in each split's block
+  (`runs.<split>.environment`); I filled in the dev blocks from the earlier logs.
+
+The C1 model card on Hugging Face now has the test results (revision `fdd98ccc`); the weights are the same file
+as revision `b38781e`, which made all predictions.
+
+## 6. Problems I solved
 
 - Transformers 5 renamed `torch_dtype` to `dtype`, and an old version stayed loaded in Colab after the install. I
   pinned the versions in `whisper_finetune/requirements-whisper.txt` and restart the runtime after installing.
